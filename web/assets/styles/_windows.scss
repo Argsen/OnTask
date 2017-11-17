@@ -1,0 +1,408 @@
+$primary-green: #86bc42;
+$primary-black: #242c42;
+$primary-grey: #737373;
+
+$primary-radius: 5px;
+
+.console-window {
+  border-right: 4px solid #E5E5E5;
+  border-top: 4px solid #E5E5E5;
+}
+
+.button-window {
+  border-top: 4px solid #E5E5E5;
+}
+
+.box {
+  button {
+    border: 4px solid white;
+  }
+}
+
+.main-window {
+  min-height: 650px;
+  max-height: 680px;
+  border: 3px solid $primary-green;
+  overflow-y: scroll;
+  overflow-x: scroll;
+
+  //border-radius: $primary-radius;
+
+
+  .export-button{
+    text-align: center;
+    margin: 20px 0 20px 0;
+  }
+}
+
+.main-window-no-scroll{
+  min-height: 500px;
+  max-height: 800px;
+  //border: 2px solid #c7c7c7;
+}
+
+.windows-divider {
+  color: $primary-black;
+  border-width: 2px;
+  margin-top: 30px;
+}
+
+.windows-conversion {
+  ul {
+    li {
+      border-bottom: 0;
+      width: 100%;
+      margin-bottom: 10px;
+
+      span {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
+        font-weight: bold;
+        color: $primary-black;
+        background-color: #ffffff;
+        margin: 0;
+        border: 0;
+        display: initial;
+      }
+
+      input {
+        width: 50%;
+        float: right;
+        margin-right: 15px;
+        border-radius: 0;
+      }
+
+      &:hover {
+        background: transparent;
+        border-bottom: 0;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.windows-button {
+  text-align: center;
+  padding-top: 20px;
+}
+/* arrow box */
+.arrow_box {
+  position: relative;
+  background: #ffffff;
+  border-right: 2px solid #242c42;
+}
+
+.arrow_box:after,
+.arrow_box:before {
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow_box:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-left-color: #ffffff;
+  border-width: 20px;
+  margin-top: -20px;
+}
+
+.arrow_box:before {
+  border-color: rgba(36, 44, 66, 0);
+  border-left-color: #242c42;
+  border-width: 23px;
+  margin-top: -23px;
+}
+/* drop down*/
+.indpn-input-container {
+  position: relative;
+}
+
+.indpn-input {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #fff;
+  background-image: url('images/search.png');
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  border: 1px solid #CCCCCC;
+  height: 50px;
+  padding: 5px 5px 5px 50px;
+  font-family: AvenirNext-Medium;
+  font-size: 17px;
+  color: #BCBCBC;
+}
+
+.indpn.opened .indpn-input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.indpn-dropdown-arrow {
+  display: inline-block;
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0;
+  cursor: pointer;
+  background: transparent url("images/chevron.png") no-repeat center center;
+}
+
+.indpn-dropdown {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.indpn-dropdown {}
+
+.indpn-dropdown ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+}
+
+.indpn-dropdown ul li {
+  background: #fff;
+  border-bottom: 1px solid #aaa;
+  font-family: AvenirNext-Medium;
+  font-size: 17px;
+  color: #BCBCBC;
+  padding: 14px 10px 5px;
+  cursor: pointer;
+  height: 50px;
+}
+
+.indpn-dropdown ul li:last-child {
+  border-bottom: none;
+}
+
+.indpn-dropdown ul li:hover {
+  background: #eee;
+  color: #BCBCBC;
+}
+
+.indpn-dropdown ul li.highlight {
+  background: #eee;
+}
+
+.indpn-dropdown ul li img {
+  vertical-align: middle;
+  margin: -5px 10px 0 0;
+}
+
+.directory-list {
+  min-height: 650px;
+  max-height: 68px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-right: 20px;
+
+  ul {
+
+    border-bottom: 4px solid transparent;
+    &:hover {
+      // background-color: rgba(134,188,66,0.5);
+      color: $primary-grey;
+      border-bottom: 4px solid transparent !important;
+    }
+
+    li {
+      border-bottom: 4px solid transparent !important;
+      margin-top: 10px;
+      display: block;
+
+      &:hover {
+        // background-color: rgba(134,188,66,0.5);
+        color: $primary-black;
+        //border-bottom: 4px solid $primary-grey !important;
+        cursor: default !important;
+      }
+    }
+  }
+}
+
+p.windows-instruction {
+  text-align: center;
+  margin-top: 225PX;
+  font-size: 40px;
+  text-transform: uppercase;
+  color: rgba(199, 199, 199, 0.5);
+}
+
+.workflow-main-window {
+  height: 500px;
+  // border: 2px solid #c7c7c7;
+  left: 5px;
+  position: relative;
+}
+
+#canvas {
+  text-align: center;
+}
+
+.workflow-console-heading {
+  border-bottom: 4px solid $primary-grey;
+  color: $primary-green;
+  padding: 10px 0 10px 0;
+  text-transform: capitalize;
+  margin-left: 45px;
+
+  i {
+    color: $primary-grey;
+  }
+}
+
+.workflow-button-group {
+  form {
+    font-size: 18px;
+    padding: 0 0 0 20px;
+    color: $primary-black;
+    text-transform: capitalize;
+
+    input {
+      color: #242c42;
+      border: 2px solid #242c42;
+      margin-top: 10px;
+      border-radius: 5px;
+      text-transform: capitalize;
+      background-color: white;
+      font-size: 20px;
+    }
+  }
+  background-color: $primary-green;
+  border-bottom: 4px solid $primary-black;
+  color: white;
+  padding: 10px 0 10px 30px;
+}
+
+.workflow-list-table {
+  tr {
+    td {
+      border-bottom: 2px solid black;
+      border-right: 2px solid black;
+      padding: 10px;
+    }
+  }
+}
+
+.padding50 {
+  margin-left: 50px;
+  padding: 10px;
+}
+
+.padding30 {
+  margin-left: 30px;
+  padding: 10px;
+}
+
+.margin20 {
+  margin-top: 20px;
+}
+
+#transformer-main-window {
+  background-color: #000;
+}
+
+.main-window-export-button {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/*-------------------- Add flowwork diagram style ------------------------------*/
+.float-window{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 99999;
+  width: 160px;
+  height: 90px;
+  border: 4px solid $primary-black;
+
+  .float-window-heading{
+    background-color: white;
+    height: 32px;
+    border-bottom: 4px solid $primary-black;
+
+    > span{
+      color: $primary-black;
+      margin: 4px 10px;
+      position: relative;
+      float: right;
+
+      &:hover{
+        cursor: pointer;
+      }
+    }
+  }
+
+  .float-window-content{
+    .float-window-mask{
+      background-color: rgba(255, 255, 255, 0.7);
+      height: 140px;
+      width: 100%;
+      position: absolute;
+      z-index: 9999;
+
+      &:hover{
+        cursor: pointer;
+      }
+
+      i{
+        font-size: 90px;
+        margin-left: 40px;
+        color: rgba(115, 115, 115, 0.3);
+      }
+    }
+  }
+}
+
+.workflow-big-screen-wrap{
+  top: 60px;
+  position: absolute;
+  width: 100%;
+
+  .workflow-big-screen{
+    z-index: 99999;
+    //border: 4px solid #242c42;
+
+    .workflow-big-screen-heading{
+      background-color: transparent;
+      height: 32px;
+      position: fixed;
+      right: 30px;
+      z-index: 100000;
+      //border-bottom: 4px solid #242c42;
+
+      > span{
+        color: $primary-black;
+        margin: 4px 10px;
+        position: relative;
+        float: right;
+        font-size: 60px;
+
+        &:hover{
+          cursor: pointer;
+        }
+      }
+    }
+
+    .workflow-big-screen-content{
+      padding-left: 100px;
+      background-color: white;
+    }
+  }
+}

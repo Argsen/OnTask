@@ -1,0 +1,44 @@
+{
+  "name": "OnTask",
+  "description": "OnTask OLTP Web APP",
+  "main": "app.js",
+  "authors": [
+    "yin_gong<max.g.laboratory@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "OnTask",
+    "OLTP"
+  ],
+  "homepage": "www.argsen.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^15.4.1",
+    "classnames": "^2.2.5",
+    "jquery2": "^2.0.0",
+    "requirejs": "^2.3.2",
+    "redux-api": "^0.9.16",
+    "font-awesome-bower": "^4.7.0",
+    "Tabslet": "^1.7.3",
+    "selectize": "^0.12.4",
+    "ejs": "^1.0.0",
+    "jquery.terminal": "^0.11.23",
+    "flowchart": "^1.6.5",
+    "raphael": "^2.2.7",
+    "jquery-modal": "^0.8.0",
+    "d3": "^4.4.4",
+    "tinymce": "^4.5.3",
+    "jquery.steps": "^1.1.0",
+    "clockpicker": "^0.0.7",
+    "datatables.net": "^1.10.15",
+    "datatables.net-dt": "^3.2.2",
+    "tooltipster": "^4.2.5"
+  }
+}

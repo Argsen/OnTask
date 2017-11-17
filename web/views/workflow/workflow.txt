@@ -1,0 +1,39 @@
+st=>start: Start
+e=>end
+op1=>operation: Manage My Data
+op2=>operation: Matrix View
+op3=>operation: Rule Coordination
+op4=>operation: Summary
+
+func1=>condition: CSV file
+func2=>condition: Database
+func3=>condition: plugin
+
+rule1=>condition: rule 1
+rule1run=>subroutine: run
+rule1result=>subroutine: result
+rule2=>condition: rule 2
+rule2run=>subroutine: run
+rule2result=>subroutine: result
+rule3=>condition: rule 3
+rule3run=>subroutine: run
+rule3result=>subroutine: result
+
+ruleSet=>condition: Rules Set
+
+st->op1
+op1->func1
+func1(yes)->func2(yes)->func3(no)
+func1(no)->op2
+func2(no)->op2
+func3(no)->op2
+
+op2->op3
+op3(right)->rule1(no)->rule2(no)->rule3
+rule1(yes)->rule1run->rule1result(left)
+rule2(yes)->rule2run->rule2result(left)
+rule3(yes)->rule3run->rule3result(left)
+
+op3->ruleSet(no)->rule1
+ruleSet(yes)->op4
+op4->e

@@ -1,0 +1,218 @@
+/**
+ * TABS
+ *
+ * -------------------------------------------------------------------------------------------------
+ */
+.tabs > div {
+	/*border-top: 1px solid #c7c7c7*/
+	margin-top: 10px;
+	background: white;
+	/*border-bottom: 4px solid #E95855 !important;*/
+}
+
+.tabs > div > span {
+	border-bottom: 4px solid #E5E5E5;
+	color: #ccc;
+	font-weight: 300;
+	line-height: 186px;
+	display: block;
+	text-align: center;
+	font-size: 24px;
+}
+
+.tabs ul.horizontal {
+	list-style: none outside none;
+	margin: 10px;
+}
+
+.tabs li {
+	background: white;
+	// border-bottom: 4px solid #E5E5E5;
+	margin: 0 10px 0 0;
+	display: inline-block;
+}
+
+.tabs a {
+	color: #ccc;
+	display: block;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 14px 24px;
+	text-decoration: none;
+}
+
+.tabs > li:hover {
+	background: #a0cac0;
+	border-bottom: 4px solid #68a697;
+}
+
+.tabs > li:hover a {
+	color: white;
+}
+
+.active {
+	background-color: white !important;
+	border-bottom: 4px solid #242c42 !important;
+}
+
+.active a {
+	color: $primary-green !important;
+	font-weight: bold;
+}
+
+.link {
+	color: white;
+	font-size: 14px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	line-height: 48px;
+	margin-top: 20px;
+	margin-left: 6px;
+	text-decoration: none;
+}
+
+.link:hover {
+	text-decoration: underline;
+	color: inherit;
+}
+
+.anchorLink {
+	border-bottom: 1px dashed white;
+	color: white;
+	text-decoration: none;
+}
+
+.anchorLink:hover {
+	text-decoration: none;
+	border-bottom: none;
+	color: inherit;
+}
+
+.screenshot {
+	position: absolute;
+	clip: rect(0 0 0 0);
+}
+
+.next,
+.prev {
+	background: white !important;
+	color: #a0cac0 !important;
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.next:hover,
+.prev:hover {
+	background: #a0cac0 !important;
+	color: white !important;
+}
+
+.inner-tab {
+	width: 100%;
+
+	ul {
+		padding: 0;
+		width: 100%;
+
+		li {
+			padding: 10px 0 10px 10px;
+			background-color: white;
+			width: 100%;
+			height: 30px;
+			vertical-align: middle;
+			cursor: pointer;
+			border-right: 2px solid #E5E5E5;
+		}
+	}
+}
+
+// .directory-list {
+// 	ul {
+// 		li {
+// 			display: block;
+// 			// border-right: 1px solid grey;
+// 			border-bottom: 2px solid transparent !important;
+//
+// 			&:hover {
+// 				cursor: pointer;
+// 				background: transparent;
+// 			}
+// 		}
+// 	}
+// }
+
+.console-bar {}
+/*------------------- vertical tabs -----------------------------*/
+.tabordion {
+	color: #333;
+	display: block;
+	font-family: arial, sans-serif;
+	position: relative;
+	width: 80%;
+}
+
+.tabordion input[name="sections"] {
+	left: -9999px;
+	position: absolute;
+	top: -9999px;
+}
+
+.tabordion section {
+	display: block;
+}
+
+.tabordion > section > label {
+	border: 1px solid #fff;
+	cursor: pointer;
+	display: block;
+	padding: 15px 20px;
+	position: relative;
+	width: 180px;
+	z-index: 100;
+	font-size: 16px !important;
+}
+
+.tabordion section article {
+	display: none;
+	left: 230px;
+	min-width: 300px;
+	padding: 0 0 0 21px;
+	position: absolute;
+	top: 0;
+}
+
+.tabordion section article:after {
+	bottom: 0;
+	content: "";
+	display: block;
+	left: -229px;
+	position: absolute;
+	top: 0;
+	width: 220px;
+	z-index: 1;
+}
+
+.tabordion input[name="sections"]:checked + label {
+	color: #bbb;
+}
+
+.tabordion input[name="sections"] + label::before{
+
+}
+
+.tabordion input[name="sections"]:checked + label::after {
+	content: '';
+	width: 0.4em;
+	height: 0.4em;
+	position: absolute;
+	top: 1.6em;
+	left: 1.55em;
+	display: inline-block;
+	background-color: #ddd;
+	border-radius: 2em;
+}
+
+.tabordion input[name="sections"]:checked ~ article {
+	display: block;
+}

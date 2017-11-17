@@ -1,0 +1,27 @@
+{
+  "name": "token-server",
+  "version": "0.0.1",
+  "description": "Token Server for Argsen",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/argsen/token-server.git"
+  },
+  "author": "Argsen",
+  "license": "UNLICENSED",
+  "homepage": "https://bitbucket.org/argsen/token-server#readme",
+  "devDependencies": {
+    "jest": "^20.0.4"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^7.4.1",
+    "restify": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=7.6.0",
+    "npm": ">=4.1.2"
+  }
+}

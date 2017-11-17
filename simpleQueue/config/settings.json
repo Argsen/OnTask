@@ -1,0 +1,20 @@
+{
+  "redis": {
+    "prefix": "q",
+    "host": "127.0.0.1",
+    "port": 6379,
+    "options": {}
+  },
+
+  "email": {
+    "host": "",
+    "port": 587,
+    "secureConnection": false,
+    "tls": {"ciphers":"SSLv3"},
+    "auth": {
+      "user": "",
+      "pass": ""
+    },
+    "from": ""
+  }
+}

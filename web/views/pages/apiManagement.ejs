@@ -1,0 +1,63 @@
+<% include ../partials/header %>
+
+
+<% include ../partials/loading %>
+
+<% include ../partials/headerPlaceholder %>
+
+<section class="action main-section">
+    <div class="grid__cell main-window">
+        <div class="grid">
+            <div class="1/2 grid__cell">
+                <div id="keyList">
+
+                </div>
+            </div>
+            <div class="1/2 grid__cell">
+                <div id="workflowList">
+
+                </div>
+            </div>
+
+            <button id="generateKey">Generate New Key</button>
+            <button id="saveAccess">Confirm Change</button>
+        </div>
+    </div>
+</section>
+
+
+<form id="uploadForm" enctype="multipart/form-data" class="fileUpload">
+  <div class="grid">
+    <div class="1/2 grid__cell">
+      <div class="padding30">
+        <input type="file" name="uploadFile" id="uploadFile" class="inputfile" accept=".zip">
+        <label for="uploadFile" id="uploadFileSpan"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp; &nbsp; Import Matrix: Please choose your ZIP file </label>
+      </div>
+    </div>
+    <div class="1/2 grid__cell margin20">
+      <input type="submit" class="btn btn-green" value="Process Data  &#xf1c0;" id="uploadSubmit" />
+    </div>
+  </div>
+</form>
+
+
+<form id="uploadForm_Rule" enctype="multipart/form-data" class="fileUpload">
+  <div class="grid">
+    <div class="1/2 grid__cell">
+      <div class="padding30">
+        <input type="file" name="uploadFile" id="uploadFile_Rule" class="inputfile" accept=".zip">
+        <label for="uploadFile_Rule" id="uploadFileSpan_Rule"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp; &nbsp; Import Rule: Please choose your ZIP file </label>
+      </div>
+    </div>
+    <div class="1/2 grid__cell margin20">
+      <input type="submit" class="btn btn-green" value="Process Data  &#xf1c0;" id="uploadSubmit_Rule" />
+    </div>
+  </div>
+</form>
+
+
+<% include ../partials/alertModal %>
+
+<script src="/js/upload.js"></script>
+<script src="/js/FileSaver.min.js"></script>
+<script src="/js/pages/apiManagement.js"></script>

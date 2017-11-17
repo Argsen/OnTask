@@ -1,0 +1,257 @@
+/* basic color */
+$primary-green: #86bc42;
+$primary-black: #242c42;
+
+$primary-radius: 5px;
+
+/* login color */
+.main-content {
+  height: auto;
+  background-color: rgba(169,169,169, 0.5);
+}
+
+.page-login {
+  min-height: 480px;
+}
+
+.login-wrapper {}
+
+.login {
+  width: 200px;
+}
+
+.login-submit {
+  button {
+    margin-right: 20px;
+  }
+}
+
+.login-span {
+  color: #242c42;
+  margin-left: 10px;
+}
+
+.login-heading {
+  color: #242c42;
+  margin-left: 10px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.rlp {
+  background: url("../images/bg-register-login.jpg") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+
+  .container {
+    height: 100%;
+    display: table;
+  }
+
+  .rlp-wrapper {
+    color: #49575f;
+    display: table-cell;
+    width: 770px;
+    vertical-align: middle;
+  }
+}
+
+.rlp-table {
+  text-align: center;
+  background-color: #fff;
+  // box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  padding: 50px 100px;
+
+  .rlp-title {
+    font-weight: bold;
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    margin-top: 20px;
+  }
+
+  .rlp-form {
+    padding-top: 0;
+    text-align: left;
+    margin-bottom: 35px;
+
+    input {
+      border-radius: 0;
+      border: none;
+    }
+  }
+}
+
+.bg-w-form {
+  .form-input {
+    background-color: #fafafa;
+    border-radius: 0;
+    // height: 50px;
+    border: none;
+    box-shadow: none;
+    width: 85%;
+
+    &:focus {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      outline: none !important;
+    }
+
+    &:active {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .highlight {
+    color: #ff0000;
+  }
+
+  .contact-question {
+    .form-input {
+      min-height: 190px;
+      max-width: 1140px;
+    }
+  }
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  border: 0;
+  border-radius: 0;
+  padding: 0 25px;
+  background: transparent;
+  text-align: center;
+  line-height: 40px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  cursor: pointer;
+  border-radius: $primary-radius;
+  // transition: all 0.2s ease;
+
+  &:hover{
+    cursor: pointer;
+  }
+
+  span {
+    margin-bottom: 0 !important;
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    // transition: all 0.25s ease;
+    &:hover{
+      cursor: pointer;
+    }
+
+  }
+}
+
+.btn-green {
+  background-color: #86bc42;
+
+  &:hover {
+    color: #ffffff;
+    background-color: $primary-black;
+
+    &:after {
+      right: 0;
+      // transition: all 0.5s ease;
+    }
+  }
+
+  &:after {
+    position: absolute;
+    content: '';
+    right: 100%;
+    //background-color: #242c42;
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+}
+
+.btn-normal {
+  color: white;
+  background-color: $primary-black;
+  border: 4px solid $primary-black;
+
+  &:hover {
+    color: $primary-black;
+    border: 4px solid $primary-black;
+    background-color: white !important;
+    // transition: all 0.25s ease;
+  }
+}
+
+.btn-cancel {
+  background-color: #d9534f;
+
+  &:hover {
+    color: #ffffff;
+    background-color: $primary-black;
+
+    &:after {
+      right: 0;
+      // transition: all 0.5s ease;
+    }
+  }
+}
+
+.btn-export {
+  color: white;
+  float: right;
+  right: 10px;
+  margin-top: 10px;
+
+  span {
+    color: white !important;
+    line-height: 35px !important;
+    padding: 5px !important;
+    border-bottom: 4px solid $primary-black !important;
+    text-transform: capitalize !important;
+  }
+}
+
+.input-text {
+  padding: 0;
+  width: 80%;
+  color: $primary-black;
+  border-bottom: 4px solid $primary-grey;
+  margin-left: 20px;
+  text-transform: capitalize;
+}
+
+.input-text .non-capitalize {
+  text-transform: none;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.loading{
+  display: block;
+  width: 100%;
+  background-color: rgba(0, 189, 157, 0.1);
+  position: fixed;
+  z-index: 9999999;
+  top: -10px;
+  height: 1500px;
+  text-align: center;
+
+  img{
+    margin-top: 350px;
+  }
+}
+
+.btn-disabled{
+  background-color: $primary-grey;
+
+  &:hover{
+    background-color: $primary-grey !important;
+    cursor: not-allowed;
+  }
+}

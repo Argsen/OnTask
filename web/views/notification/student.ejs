@@ -1,0 +1,52 @@
+<% include ../partials/header %>
+
+<% include ../partials/loading %>
+
+<% include ../partials/headerPlaceholder %>
+
+<Section class="main-section">
+  <div class="grid">
+    <div class="grid__cell main-window padding-10">
+      <table id="table_id" class="display">
+        <thead>
+        <tr>
+          <th>Email</th>
+          <th>Info</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Created Time</th>
+        </tr>
+        </thead>
+        <!--<tbody>-->
+        <!--</tbody>-->
+        <tfoot>
+        <tr>
+          <th>Email</th>
+          <th></th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Created Time</th>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="display-modal" style="display:none;">
+    <h3 class="red"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; Content </h3>
+    <article id="display-content">
+
+    </article>
+    <br>
+    <div class="workflow-create-form-button-group">
+      <button class="btn btn-cancel" onclick="$.modal.close();">
+      <span><i class="fa fa-ban" aria-hidden="true"></i>&nbsp; Cancel </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/js/notification/student.js"></script>

@@ -1,0 +1,139 @@
+<!-- views/partials/dataAssociation.ejs -->
+
+<section id="data-association-step-1">
+  <h3>&nbsp; My data is empty, please finish step 1:</h3>
+  <div id="create-view" class="wizard">
+
+    <h3>Please choose <strong>Primary Key</strong></h3>
+    <section>
+      <div class="">
+        <h3>* You need to choose one column as primary key:</h3>
+        <div class="grid">
+          <div class="1/2 grid__cell">
+            <span>Primary Key Table: </span>
+            <select id="PK-table">
+            </select>
+          </div>
+          <div class="1/2 grid__cell">
+            <span>Primary Key Column: </span>
+            <select id="PK-column">
+            </select>
+          </div>
+        </div>
+        <br>
+        <span class="red" id="error-message" style="display:none;"><strong>* Please fill all required fields.</strong></span>
+      </div>
+    </section>
+
+    <h3>Rename <strong>Primary Key</strong></h3>
+    <section>
+      <div class="">
+        <h3>* Would you like to rename your <strong>Primary Key?</strong></h3>
+        <div class="grid">
+          <div class="grid__cell">
+            <span>New Primary Key name: </span>
+            <input class="text-input" id="step-1-id" type="text" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h3>Submit</h3>
+    <section>
+      <div id="data-association-step-1-final">
+
+      </div>
+    </section>
+
+  </div>
+</section>
+
+<section id="data-association-step-2">
+  <h2>&nbsp; You have set up main table, please add more data:</h2>
+  <div id="add-view" class="wizard">
+
+    <h3>Please add more data to your workflow</h3>
+    <section>
+      <div class="">
+        <h3>* Please choose column to add</h3>
+        <div class="grid">
+          <div class="1/2 grid__cell">
+            <span>Insert table</span><select id="add-table">
+
+            </select>
+          </div>
+          <div class="1/2 grid__cell">
+            <span>Insert Column</span><select id="add-column">
+
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <h3>* Would you like to re-name this column?</h3>
+        <div class="grid">
+          <div class="grid__cell">
+            <span>Re-name Column: <input id="add-constraints-rename" class="text-input" type="text" name="" value="" /></span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <span class="red" id="error-message-2" style="display:none"><strong>* Please fill all required fields.</strong></span>
+    </section>
+
+    <h3>Please set up constraint</h3>
+    <section>
+      <div class="" id="add-constraints-wrap-1">
+        <h3>* Please set up constraints</h3>
+        <div class="grid">
+          <div class="grid__cell">
+            <div class="grid">
+              <div class="1/2 grid__cell">
+                <span>constraints main table:
+                  <select class="" name="" id="add-constraints-main-table">
+                  </select>
+                </span>
+              </div>
+
+              <div class="1/2 grid__cell">
+                <span>constraints main column:
+                  <select class="" name="" id="add-constraints-main-column">
+                  </select>
+                </span>
+              </div>
+
+              <div class="1/2 grid__cell">
+                <span>reference table:
+                  <select class="" name="" id="add-constraints-reference-table">
+                  </select>
+                </span>
+              </div>
+
+              <div class="1/2 grid__cell">
+                <span>reference column:
+                  <select class="" name="" id="add-constraints-reference-column">
+                  </select>
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="" id="add-constraints-wrap-2">
+        <h3>* You do not need to set up constraints, please click next to continue.</h3>
+      </div>
+      <br>
+      <span class="red" id="error-message-3" style="display:none"><strong>* Please fill all required fields.</strong></span>
+    </section>
+
+    <h3>submit</h3>
+    <section>
+      <div id="data-association-step-2-final">
+
+      </div>
+    </section>
+
+  </div>
+</section>

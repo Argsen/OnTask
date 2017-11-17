@@ -1,0 +1,54 @@
+<!-- views/partials/ruleManagement -->
+
+<section class="main-section">
+
+  <div class="rule-button-container">
+    <button class="btn btn-green" id="create-new-rule"><span><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; New Rule &nbsp;</span></button>
+  </div>
+
+  <div class="rule-management">
+      <div class="grid" id="rule-management-list">
+
+      </div>
+
+  </div>
+
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="rule-create-modal" style="display:none;">
+    <h3><i class="fa fa-plus" aria-hidden="true"></i> &nbsp;Create new rule  &nbsp;</h3>
+    <label>Rule name :</label><span class="workflow-create-form-border"><input type="text" id="new-rule-name"/></span>
+    <br>
+    <label>Description :</label><span class="workflow-create-form-border"><textarea rows="4" cols="50" id="new-rule-description"></textarea></span>
+    <br>
+    <span id="rule-create-error" style="display:none">
+      <p class="red"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Sorry, you are confronting technical error, please try later.</p>
+    </span>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-green" id="create-rule-btn">
+      <span><i class="fa fa-envelope-open" aria-hidden="true"></i> &nbsp;Create </span>
+    </button>
+    <button class="btn btn-cancel" id="cancel-create-rule-btn">
+      <span><i class="fa fa-ban" aria-hidden="true"></i> &nbsp;Cancel </span>
+    </button>
+  </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="delete-rule-modal" style="display:none">
+    <h3>Delete rule  &nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></h3>
+    <h4>Do you really want to delete this rule?</h4>
+    <br>
+    <div class="workflow-create-form-button-group">
+      <button class="btn btn-green" id="confirm-delete">
+      <span>Confirm <i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
+    </button>
+      <button class="btn btn-cancel" id="exit-delete">
+      <span>Cancel <i class="fa fa-ban" aria-hidden="true"></i></span>
+    </button>
+    </div>
+  </div>
+</section>

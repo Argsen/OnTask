@@ -1,0 +1,29 @@
+#term_demo {
+  margin: 0;
+  background: black;
+  padding: 0;
+}
+
+.console-wrap {
+  padding: 20px 0 0 0;
+}
+
+.console-heading {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: capitalize;
+  padding-left: 40px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  border-bottom: 4px solid;
+
+  i{
+    padding: 0 20px 0 0;
+  }
+}
+
+.console-list {
+  ul {
+    list-style-type: none;
+  }
+}

@@ -1,0 +1,257 @@
+<!-- views/partials/header.ejs -->
+
+<header>
+
+  <div class="header-main">
+    <div class="header-main-wrapper">
+      <div class="navbar-heade">
+        <div class="logo pull-left">
+          <span class="large-heading"><img src="/images/ontask-logo-1.png"> <span class="sub-heading">version 1.0.0</span></span>
+        </div>
+        <div class="pull-right right-logo">
+          <span class="medium-heading" id="notification-sub-heading"></span>
+          <span class="medium-heading home-heading" id="notification-sub-heading-setting"><span>|&nbsp;</span><i class="fa fa-sliders" aria-hidden="true"></i></span>
+          <span id="redirect-heading"><span class="medium-heading home-heading" class="tooltip" title="Back to workflow overview list"><span>|&nbsp;</span><i class="fa fa-home" aria-hidden="true"></i></span></span>
+          <span id="redirect-heading-rule-list" style="display:none"><span class="medium-heading home-heading" class="tooltip" title="Back to rule list"><span>|&nbsp;</span><i class="fa fa-list-alt" aria-hidden="true"></i></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notification-section">
+    <div class="container">
+      <div class="grid">
+      </div>
+    </div>
+  </div>
+
+  <div class="heading-drop-down-wrap"  id="heading-drop-down-wrap" style="display:none;">
+    <!-- <div class="triangle-up"></div> -->
+    <div class="heading-drop-down">
+    <ul>
+      <li><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Change Password</li>
+      <li id="logout-button"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
+    </ul>
+    </div>
+  </div>
+
+</header>
+
+<section>
+  <div class="workflow-create-form modal" id="change-password-modal" style="display:none;">
+    <h3> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp; Change your password  </h3>
+    <label>Old Password :</label><span class="workflow-create-form-border"><input type="password" id="old-password"/></span>
+    <br>
+    <label>New Password :</label><span class="workflow-create-form-border"><input type="password" id="new-password"/></span>
+    <br>
+    <label>Confirm New Password :</label><span class="workflow-create-form-border"><input type="password" id="confirm-password"/></span>
+    <br>
+    <span id="change-password-error" style="display:none">
+      <p class="red"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>Please double check your input information</p>
+    </span>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-green" id="update-password-btn">
+      <span>Update</span>
+    </button>
+    <button class="btn btn-cancel" onclick="$.modal.close();">
+      <span>Cancel</span>
+    </button>
+  </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="success-change-password-modal" style="display:none;">
+    <h3> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp; Congratulations!  </h3>
+    <label>You have successfully changed your password!</label>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-cancel" onclick="$.modal.close();">
+      <span>Yes, I got it.</span>
+    </button>
+  </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="workflow-create-form modal" id="alert-password-modal" style="display:none;">
+    <h3 class="red"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> &nbsp; Ops!  </h3>
+    <label>Your new password is too short! Please change it.</label>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-green" onclick="$.modal.close(); window.location.reload();">
+      <span>Confirm <i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
+    </button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="logoutModal" style="display:none">
+    <h3><i class="fa fa-sign-out" aria-hidden="true"></i> Logout onTask system  &nbsp;</h3>
+    <h4>Do you really want to logout onTask system?</h4>
+    <br>
+    <div class="workflow-create-form-button-group">
+      <button class="btn btn-green" id="confirm-logout">
+      <span><i class="fa fa-check-circle-o" aria-hidden="true"></i> &nbsp;Confirm </span>
+    </button>
+      <button class="btn btn-cancel" id="exit-logout">
+      <span><i class="fa fa-ban" aria-hidden="true"></i> &nbsp;Cancel </span>
+    </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- Header Modal -->
+
+<script type="text/javascript">
+
+(function($){
+
+   var $notificationSubHeadingSetting = $("#notification-sub-heading-setting");
+   $notificationSubHeadingSetting.on("click", function(){
+     $("#heading-drop-down-wrap").toggle(300);
+   });
+
+   var $headingDropDown = $(".heading-drop-down ul").children();
+   $headingDropDown.eq(0).on("click", function(){
+     var $changePasswordModal = $("#change-password-modal");
+     $changePasswordModal.modal();
+     $("#old-password").focus();
+     $notificationSubHeadingSetting.trigger("click");
+
+   });
+
+   var $oldPassword = $("#old-password");
+   var $newPassword = $("#new-password");
+   var $confirmPassword = $("#confirm-password");
+   var $updatePasswordBtn = $("#update-password-btn");
+   var $changePasswordError =$("#change-password-error");
+
+
+   //TODO: verifiy old password
+   $updatePasswordBtn.on("click", function(){
+
+     if($oldPassword.val() != '' && $confirmPassword.val() === $newPassword.val() && $confirmPassword.val()!= ''){
+       $changePasswordError.hide();
+
+       if($confirmPassword.val().length <= 4){
+
+         $("#alert-password-modal").modal();
+
+       }else{
+         $.ajax({
+           type: 'POST',
+           url: 'user/update',
+           dataType: 'json',
+           data:{
+             password: $confirmPassword.val()
+           },
+           success: function(response) {
+
+             if(response.status === "success"){
+               $.modal.close();
+               $successChangePasswordModal = $("#success-change-password-modal");
+               $successChangePasswordModal.modal();
+
+             }
+
+           }
+         });
+       }
+
+     }else{
+       $changePasswordError.hide();
+       $changePasswordError.show();
+     }
+
+   });
+
+   /*----------------------show logout button--------------------*/
+   var onTaskInfo = window.localStorage.getItem('onTaskInfo');
+   var $logoutButton = $("#logout-button");
+   var $logoutModal = $("#logoutModal");
+
+   if(onTaskInfo != ''){
+     $logoutButton.show();
+     $logoutButton.on("click", function(){
+       $logoutModal.modal();
+     });
+   }else{
+     $logoutButton.hide();
+   }
+
+   $confirmLogout = $("#confirm-logout");
+   $confirmLogout.on("click", function(){
+     $.ajax({
+       type: 'POST',
+       url: 'user/logout',
+       dataType: 'json',
+       data: {},
+       error: function (response) {
+
+       },
+       success: function (response) {
+         window.localStorage.setItem('onTaskInfo', '');
+         $.modal.close();
+         window.location.href = "/";
+       }
+     });
+   });
+
+   $exitLogout = $("#exit-logout");
+   $exitLogout.on("click", function(){
+     $.modal.close();
+   });
+   /*----------------------end show logout button--------------------*/
+
+   var onTaskInfo = JSON.parse(window.localStorage.getItem('onTaskInfo'));
+
+   var $overviewSubHeading = $("#notification-sub-heading");
+   if (onTaskInfo != null) {
+     $overviewSubHeading.empty();
+     var div = $("<img src='/images/home/user.png'><span class='name'>" + onTaskInfo.lastName + ',' + onTaskInfo.firstName + "</span>");
+     $overviewSubHeading.append(div);
+
+   } else {
+     console.log("no local strorage");
+     window.location.href = "/"
+   }
+
+   /*---------------show rule list button --------------------------*/
+   var url= window.location.href;
+   var re = new RegExp("editRule");
+   var re2 = new RegExp("notification");
+
+   if(re.test(url) || re2.test(url) ){
+     $("#redirect-heading-rule-list").show();
+   }else{
+     $("#redirect-heading-rule-list").hide();
+   }
+
+   /*------------ tooltipster -------------------------------------*/
+   $('.tooltip').tooltipster({
+   });
+
+   /*----------- bind re-direct function --------------------------*/
+   $("#redirect-heading").on("click", function(){
+     window.location = "/overview";
+   })
+   $("#redirect-heading-rule-list").on("click", function(){
+     window.location = "/action";
+   })
+
+   /*----------- event---------------------------------------------*/
+   $("#heading-drop-down-wrap").hover(function(){
+     //console.log("in")
+   },function(){
+     $(this).hide();
+   })
+
+
+})(jQuery);
+
+</script>

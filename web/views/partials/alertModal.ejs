@@ -1,0 +1,41 @@
+<!-- views/partials/alertModal.ejs -->
+
+<section>
+  <div class="workflow-create-form modal" id="alert-modal" style="display:none;">
+    <h3 id="alert-modal-heading"></h3>
+    <p id="alert-modal-content"></p>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-green" onclick="$.modal.close(); window.location.href = '/action';">
+      <span><i class="fa fa-check-circle-o" aria-hidden="true"></i> &nbsp;Confirm </span>
+    </button>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="workflow-create-form modal" id="verified-modal" style="display:none;">
+    <h3 id="verified-modal-heading"></h3>
+    <p id="verified-modal-content"></p>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-green" onclick="$.modal.close(); window.location.reload();">
+      <span><i class="fa fa-check-circle-o" aria-hidden="true"></i> &nbsp;OK </span>
+    </button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="check-modal" style="display:none;">
+    <h3 id="check-modal-heading"></h3>
+    <p id="check-modal-content"></p>
+    <br>
+    <div class="workflow-create-form-button-group">
+      <button class="btn btn-green" onclick="$.modal.close();">
+        <span><i class="fa fa-check-circle-o" aria-hidden="true"></i> &nbsp;OK </span>
+      </button>
+    </div>
+  </div>
+</section>

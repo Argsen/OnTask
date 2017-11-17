@@ -1,0 +1,34 @@
+<!-- views/partials/sessionModal.ejs -->
+
+<section>
+  <div class="workflow-create-form modal" id="session-modal" style="display:none;">
+    <h3 class="red">Opps &nbsp;<i class="fa fa-exclamation-triangle" aria-hidden="true"></i></h3>
+    <p>Your session has expired, please login again. </p>
+    <p>If you have any questions, please contact <a style="font-size:16px;" href="https://www.ontasklearning.org/" class="red" target="_blank">OnTask Support</a></p>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-cancel" onclick="$.modal.close();">
+        <a href="/"><span><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp; OK, to login page</span></a>
+    </button>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="workflow-create-form modal" id="share-modal" style="display:none;">
+    <h3><i class="fa fa-trash-o" aria-hidden="true"></i> &nbsp;Share workflow  &nbsp;</h3>
+    <input class="data_list" list="share-searchUser" id="share-inputUser">
+    <datalist id="share-searchUser"></datalist>
+    <ul id="share-userList"></ul>
+    <br>
+    <div class="workflow-create-form-button-group">
+      <button class="btn btn-green" onclick="$.modal.close();" id="share-confirm">
+        <span><i class="fa fa-check-circle-o" aria-hidden="true"></i>&nbsp; Confirm</span>
+      </button>
+      <button class="btn btn-cancel" onclick="$.modal.close();" id="exit-delete">
+        <span><i class="fa fa-ban" aria-hidden="true"></i> &nbsp;Cancel </span>
+      </button>
+    </div>
+  </div>
+</section>

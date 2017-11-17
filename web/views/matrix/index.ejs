@@ -1,0 +1,180 @@
+<% include ../partials/header %>
+
+<% include ../partials/navigation %>
+
+<% include ../partials/loading %>
+
+<% include ../partials/headerPlaceholder %>
+
+<section class="main-section">
+  <div class="container">
+    <div class="row">
+      <article>
+        <div class="tabs tabs_data">
+          <ul class="horizontal">
+            <li><a href="#tab-1">Overview</a></li>
+            <li><a href="#tab-2">Conversion</a></li>
+            <li><a href="#tab-3">Internal Transformer</a></li>
+            <li><a href="#tab-4" style="display:none">External Transformer</a></li>
+            <li><a href="#tab-5">Custom Attributes</a></li>
+          </ul>
+
+          <div id="tab-1" style="display: block;">
+            <div class="grid">
+              <!--<div class="1/3&#45;&#45;lap 1/4&#45;&#45;desk grid__cell">-->
+              <!--<div class="grid">-->
+              <!--<div class="grid__cell">-->
+              <!--<div class="directory-list" id="matrix-overview-left-block">-->
+
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<div class="2/3&#45;&#45;lap 3/4&#45;&#45;desk grid__cell main-window">-->
+              <!--<div class="data-span" id="matrix-preview">-->
+              <!--<span>Please click left list to show matrix details</span>-->
+              <!--</div>-->
+              <!--</div>-->
+
+              <div class="grid__cell main-window">
+                <table id="table_id" class="display">
+
+                </table>
+              </div>
+
+              <!--<div class="grid__cell main-window">-->
+              <!--<div class="data-span" id="matrix-preview">-->
+              <!--<span>Please click left list to show matrix details</span>-->
+              <!--</div>-->
+              <!--</div>-->
+            </div>
+
+          </div>
+
+          <div id="tab-2" style="display: none;">
+            <div class="grid">
+              <div class="1/4 grid__cell">
+                <div class="grid">
+                  <div class="grid__cell">
+                    <div class="directory-list" id="conversion-left-block">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="3/4 grid__cell main-window">
+                <div class="grid">
+                  <img class="indicator-img" src="/images/question.png">
+                  <!-- <p class="windows-instruction" id="coversion-instruction">Select a column from the matrix to apply a conversion</p> -->
+                  <div class="1/2 grid__cell" id="arrow-box">
+                    <div class="windows-conversion" id="conversion-main-left">
+
+                    </div>
+                  </div>
+                  <div class="1/2 grid__cell">
+                    <div class="windows-conversion" id="conversion-main-right">
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="windows-button" id="conversion-main-button">
+                  <input style="display:none" type="button" class="btn btn-normal" value="&#xf054; Convert" id="convert" />
+                  <input style="display:none" type="button" class="btn btn-normal" value="&#xf054; Delete" id="delete" />
+                </div>
+
+              </div>
+
+
+            </div>
+          </div>
+
+          <div id="tab-3" style="display: none;">
+            <div class="grid">
+              <!--<div class="1/4 grid__cell">-->
+              <!--<div class="grid">-->
+              <!--<div class="grid__cell">-->
+              <!--<div class="directory-list" id="transformer-left-block-item">-->
+
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!-- <div class="3/4 grid__cell main-window" id="transformer-main-window"> -->
+              <!--<div class="3/4 grid__cell main-window">-->
+              <div class="grid__cell main-window" id="internal-transformer-main">
+
+              </div>
+            </div>
+          </div>
+
+          <div id="tab-4" style="display: none;">
+            <div class="grid">
+              <div class="grid__cell main-window">
+                <div class="data-span" style="height:350px;">
+                  <span>External Transformer (pending)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="tab-5" style="display: none;">
+            <div class="grid">
+              <div class="grid__cell main-window">
+                <article class="action-editor-wrap">
+                  <div id="customAttributeArea">
+
+                  </div>
+
+                  <div class="customAttributeContainer grid">
+
+                    <div class="centerButton">
+                      <button id="customAttributeAdd" class="centerButton-btn"><i class="fa fa-plus" aria-hidden="true"></i><h5>New Attributes &nbsp;</h5></button>
+                      <button id="customAttributeConfirm" class="centerButton-btn"><i class="fa fa-floppy-o" aria-hidden="true"></i><h5>Save &nbsp;</h5></button>
+                    </div>
+
+                  </div>
+
+                  <div class="customAttributeList" id="customAttributeList">
+
+                  </div>
+
+
+                </article>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </div>
+  </div>
+
+</section>
+
+<% /* include ../partials/diagram */ %>
+
+<% /* include ../partials/console */ %>
+
+<% include ../partials/alertModal %>
+
+<section>
+  <div class="workflow-create-form modal" id="help-modal" style="display:none" >
+    <h3 class="green"><i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp; OnTask help &nbsp;</h3>
+    <h4>Select a column from the matrix to apply a conversion</h4>
+    <br>
+    <div class="workflow-create-form-button-group">
+      <button class="btn btn-green" id="help-finish" onclick="$.modal.close();">
+      <span>OK, I got it. <i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<script src="/bower_components/jquery.terminal/js/jquery.mousewheel-min.js"></script>
+<!--<script src="/js/matrix/terminal.js"></script>-->
+<script src="/js/export.js"></script>
+<script src="/js/list.js"></script>
+<script src="/js/FileSaver.min.js"></script>
+<script src="/js/matrix/index.js"></script>

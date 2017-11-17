@@ -1,0 +1,76 @@
+<% include ../partials/header %>
+
+<% include ../partials/loading %>
+
+<% include ../partials/headerPlaceholder %>
+
+<section class="overview-section">
+  <div class="container">
+    <div class="grid" id="overview-sub-heading">
+
+
+    </div>
+  </div>
+</section>
+
+<section class="overview-section">
+  <div class="container">
+    <div class="grid" id="overview-list">
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="workflowCreate" style="display:none;">
+    <h3><i class="fa fa-plus" aria-hidden="true"></i> &nbsp;New workflow&nbsp;</h3>
+    <label>Work flow name :</label><span class="workflow-create-form-border"><input type="text" id="new-workflow-name"/></span>
+    <br>
+    <label>Description :</label><span class="workflow-create-form-border"><textarea rows="4" cols="50" id="new-workflow-description"></textarea></span>
+    <br>
+    <span id="overview-create-error" style="display:none">
+      <p class="red"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Sorry, you are confronting technical error, please try later.</p>
+    </span>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-green" id="create-workflow-btn">
+      <span><i class="fa fa-envelope-open" aria-hidden="true"></i> Create </span>
+    </button>
+    <button class="btn btn-cancel" id="cancel-create-workflow-btn">
+      <span><i class="fa fa-ban" aria-hidden="true"></i> Cancel </span>
+    </button>
+  </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="deleteModal" style="display:none">
+    <h3><i class="fa fa-trash-o" aria-hidden="true"></i> &nbsp;Delete workflow  &nbsp;</h3>
+    <h4>Are you sure you want to delete this workflow?</h4>
+    <br>
+    <div class="workflow-create-form-button-group">
+      <button class="btn btn-green" id="confirm-delete">
+      <span><i class="fa fa-check-circle-o" aria-hidden="true"></i> &nbsp; Yes </span>
+    </button>
+      <button class="btn btn-cancel" id="exit-delete">
+      <span><i class="fa fa-ban" aria-hidden="true"></i> &nbsp;Cancel </span>
+    </button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="alert-modal" style="display:none;">
+    <h3 id="alert-modal-heading"></h3>
+    <h4 id="alert-modal-content"></h4>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-green" onclick="$.modal.close(); window.location.href = '/overview';">
+      <span>Confirm <i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
+    </button>
+    </div>
+  </div>
+</section>
+
+<script src="/js/FileSaver.min.js"></script>
+<script type="text/javascript" src="/js/home/overview.js"></script>

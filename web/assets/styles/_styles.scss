@@ -1,0 +1,162 @@
+/* styles */
+
+$primary-green: #86bc42;
+$primary-black: #242c42;
+$primary-grey: #737373;
+$primary-red: #c9302c;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+a {
+  color: #fff;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #737373;
+  background-color: #ffffff;
+  margin: 0;
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  font-family: FontAwesome, Helvetica, Arial, sans-serif;
+}
+
+#cy {
+  height: 100%;
+  width: 100%;
+  position: inherit;
+  left: 0;
+  top: 0;
+}
+
+// #info {
+//   color: #c88;
+//   font-size: 1em;
+//   position: inherit;
+//   z-index: -1;
+//   left: 1em;
+//   top: 1em;
+// }
+
+.fileUpload {
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+
+  span {
+    color: black;
+    font-size: 30px;
+    margin: 0 20px 0 20px;
+  }
+}
+
+.fileUpload input.upload {
+  border: 2px solid #242c42;
+  position: inherit;
+  top: 0;
+  right: 0;
+  margin: 0;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 1;
+  padding: 10px;
+  width: 80%;
+}
+
+.main-section{
+  padding-left: 100px;
+}
+
+select {
+  font-size: 16px;
+  border: none;
+  border-bottom: 4px solid $primary-green;
+  color: $primary-black;
+  padding: 10px 40px 10px 10px;
+  width: 80%;
+  -webkit-appearance: none;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50px' height='50px'><polyline points='46.139,15.518 25.166,36.49 4.193,15.519'/></svg>") right no-repeat;
+  background-transparency: 0.5;
+  background-position: right 10px top 14px;
+  background-size: 18px 18px;
+  border-radius: 0;
+  margin: 0 10px;
+
+    &:active{
+      border: 1px solid #000;
+    }
+}
+
+*{
+  &:focus{
+    outline: none;
+  }
+
+}
+
+/*------------------- modify the track style--------------------- */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: $primary-green;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+	background: $primary-grey;
+}
+
+
+.text-input{
+  background-color: #edecec;
+  color: $primary-black;
+  font-size: 16px;
+  border: none;
+  border-bottom: 4px solid #86bc42;
+  padding: 10px 40px 10px 10px;
+  width: 80%;
+  -webkit-appearance: none;
+  background-position: right 10px top 14px;
+  background-size: 18px 18px;
+  border-radius: 0;
+  margin: 0 10px;
+}

@@ -1,0 +1,146 @@
+<header>
+  <div class="header-main">
+    <div class="header-main-wrapper">
+      <div class="navbar-heade">
+        <div class="logo pull-left">
+          <span class="overview-large-heading"><img src="/images/ontask-logo-1.png"> <span class="overview-sub-heading">version 1.0.0</span></span>
+        </div>
+        <div class="pull-right overview-input">
+          <!-- <button type="button" class="overview-search-button" id="logout-button"><span>&nbsp; Logout &nbsp;</span></button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<% include ../partials/loading %>
+
+<section>
+  <div class="container section">
+    <!-- <div class="group-title-index">
+      <h2 class="center-title">OnTask Version 0.0.1 (Demo)</h2>
+      <div class="bottom-title"><i class="bottom-icon fa fa-minus" aria-hidden="true"></i><i class="bottom-icon fa fa-desktop" aria-hidden="true"></i><i class="bottom-icon fa fa-minus" aria-hidden="true"></i></div>
+    </div> -->
+
+    <div class="latest-news-wrapper">
+      <div class="edugate-layout-1">
+        <div class="edugate-image"><img src="/images/home/logo_0.9.0.png" alt="" class="img-responsive"></div>
+        <div class="edugate-content">
+
+          <div class="login-table rlp-table">
+            <!-- <a href="/"><span class="login-heading">OnTask</span><span class="login-span">version 0.9.7</span></a> -->
+            <div class="login-form bg-w-form rlp-form">
+              <div class="row">
+                <div class="tooltip-wrapper">
+                  <div class="form-margin-bottom">
+                    <label for="regemail" class="control-label form-label "><img src="/images/home/email.png">User Email</label>
+                    <input id="regemail" type="email" placeholder="" class="form-control form-input error-hint" />
+                    <div class="tooltip">Enter a vaild email</div>
+                  </div>
+                </div>
+                <div class="tooltip-wrapper">
+                  <div class="form-margin-bottom"><label for="regpassword" class="control-label form-label"><img src="/images/home/password.png">password </label><input id="regpassword" type="password" placeholder="" class="form-control form-input">
+                  <div class="tooltip">I am a tooltip!</div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="login-submit">
+              <button type="submit" id="login" class="btn btn-login btn-green"><span>login</span></button>
+            </div>
+            <div class="login-submit">
+              <span class="password-retrieve" >Forgot your password? <span id="passwordRetrieve" style="text-decoration:underline;">Click here</span></span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="logo-set">
+
+    <div class="wrap">
+    <a href="https://www.ontasklearning.org/ontask-funding-collaborating-universities/"><img class="aligncenter wp-image-201 size-full" src="https://www.ontasklearning.org/wp-content/uploads/logo-set3.gif" alt="OnTask logo set" width="1140" height="164"></a>
+    <p>Funded by the Australian Government Department of Education and Training</p>
+
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="workflow-create-form modal" id="disclaimer-modal" style="display:none">
+    <h3>Copyright & Disclaimer &nbsp;<i class="fa fa-id-card" aria-hidden="true"></i></h3>
+    <article style="font-size:11px;">
+      <p>You are responsible for your use of the Services, for any Content you post to the Services, and for any consequences thereof. </p>
+      <p>The Content you submit, post, or display will be able to be viewed by other users of the Services and through third party services and websites. You should only provide Content that you are comfortable sharing with others under these Terms.</p>
+      <p>All Content, whether publicly posted or privately transmitted, is the sole responsibility of the person who originated such Content. We may not monitor or control the Content posted via the Services and, we cannot take responsibility for such Content. Any use or reliance on any Content or materials posted via the Services or obtained by you through the Services is at your own risk.</p>
+      <p>We do not endorse, support, represent or guarantee the completeness, truthfulness, accuracy, or reliability of any Content or communications posted via the Services or endorse any opinions expressed via the Services. You understand that by using the Services, you may be exposed to Content that might be offensive, harmful, inaccurate or otherwise inappropriate, or in some cases, postings that have been mislabeled or are otherwise deceptive.</p>
+      <p>Under no circumstances will onTask be liable in any way for any Content, including, but not limited to, any errors or omissions in any Content, or any loss or damage of any kind incurred as a result of the use of any Content posted, transmitted or otherwise made available via the Services or broadcast elsewhere.</p>
+    </article>
+    <br>
+    <div class="workflow-create-form-button-group">
+      <button class="btn btn-green" id="disclaimer-accept">
+      <span><i class="fa fa-check-circle-o" aria-hidden="true"></i> &nbsp;Accept </span>
+    </button>
+      <button class="btn btn-cancel" id="disclaimer-reject">
+      <span><i class="fa fa-ban" aria-hidden="true"></i> &nbsp;Reject </span>
+    </button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="error-modal" style="display:none" >
+    <h3 class="red"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> &nbsp; Sorry &nbsp;</h3>
+    <h4>You entered an invalid email address and password combination.</h4>
+    <h4>Please visit <a  style="font-size:16px;" class="red" href="https://www.ontasklearning.org/">onTask website</a> to contact us, We will help you to solve this.</h4>
+    <br>
+    <div class="workflow-create-form-button-group">
+      <button class="btn btn-cancel" id="exit-delete" onclick="$.modal.close();">
+      <span><i class="fa fa-ban" aria-hidden="true"></i> &nbsp;Cancel </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="forget-password-modal" style="display:none">
+    <h3><i class="fa fa-window-restore" aria-hidden="true"></i> Retrieve Password</h3>
+    <label>Please enter your email address :</label><span class="workflow-create-form-border"><input type="text" id="passwordRetrieveEmail"/></span>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-green" id="passwordRetrieveSubmit">
+      <span><i class="fa fa-upload" aria-hidden="true"></i> &nbsp;submit</span>
+    </button>
+    <button class="btn btn-cancel" onclick="$.modal.close();">
+      <span><i class="fa fa-ban" aria-hidden="true"></i> &nbsp;Cancel</span>
+    </button>
+  </div>
+  </div>
+</section>
+
+<section>
+  <div class="workflow-create-form modal" id="alert-modal" style="display:none;">
+    <h3 id="alert-modal-heading"></h3>
+    <h4 id="alert-modal-content"></h4>
+    <br>
+    <div class="workflow-create-form-button-group">
+    <button class="btn btn-green" onclick="$.modal.close(); window.location.href = '/';">
+      <span>Confirm <i class="fa fa-check-circle-o" aria-hidden="true"></i></span>
+    </button>
+    </div>
+  </div>
+</section>
+
+
+<% include ../partials/footer %>
+
+
+<script src="/bower_components/jquery-modal/jquery.modal.js"></script>
+<script src="/js/home/index.js"></script>

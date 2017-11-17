@@ -1,0 +1,14 @@
+/web/.sass-cache/
+/web/config/connections.js
+/web/.tmp/
+/web/node_modules/
+/web/assets/bower_components/
+/web/config/serverInfo.js
+
+simpleQueue/node_modules/
+
+web/package-lock\.json
+
+token-server/key/
+
+web/config/constant\.js

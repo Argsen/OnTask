@@ -1,0 +1,116 @@
+/* left slider */
+$primary-green: #86bc42;
+$primary-black: #242c42;
+$primary-radius: 5px;
+
+.out{
+  left:-220px;
+  transition: all 0.2s ease;
+}
+
+.left-slider {
+  position: fixed;
+  top: 75px;
+  background-color: #ffffff;
+  border: 3px solid $primary-green;
+  width: 95px;
+  z-index: 9999;
+  transition: 0.3s left cubic-bezier(0.03, 0.88, 0.34, 0.97);
+
+  .btn-left-slider {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #ffffff;
+    position: absolute;
+    font-size: 16px;
+    color: #ababae;
+    z-index: 9999;
+    right: -40px;
+    top: 0;
+    box-shadow: 3px 0 5px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .content-left-slider {
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+
+    .title {
+      padding: 20px 0;
+      color: $primary-black;
+      text-transform: uppercase;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      margin: 0;
+      text-transform: capitalize;
+    }
+
+    ul {
+      li {
+        padding: 0 20px;
+        background-color: white;
+        width: 40px;
+        height: 80px;
+        border-bottom: 4px solid $primary-green;
+        vertical-align: middle;
+        margin: 3px 7px;
+        cursor: pointer;
+        // border-top-left-radius: $primary-radius;
+        // border-top-right-radius: $primary-radius;
+
+        &:hover{
+          border-bottom: 4px solid $primary-black;
+        }
+      }
+    }
+
+    .label-title {
+      text-transform: uppercase;
+      font-size: 10px;
+      color: $primary-black;
+    }
+
+    i {
+      font-size: 20px;
+      color: $primary-black;
+    }
+  }
+}
+
+.list-inline {
+  padding-left: 0;
+  margin-left: -5px;
+  list-style: none;
+
+  & > li {
+    display: inline-block;
+    // padding-right: 5px;
+    // padding-left: 5px;
+  }
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+.activated {
+  background-color: $primary-black !important;
+  border: 4px solid $primary-black !important;
+  // border-radius: $primary-radius;
+
+  .label-title {
+    color: white !important;
+  }
+
+  i {
+    color: white !important;
+  }
+}

@@ -1,0 +1,423 @@
+$primary-green: #86bc42;
+$primary-black: #242c42;
+$primary-red: #c9302c;
+$primary-grey: #737373;
+
+$primary-radius: 5px;
+
+.action-editor-wrap {
+  width: 100%;
+
+  h5 {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 15px;
+    text-transform: capitalize;
+    margin: 0 0 0 10px;
+  }
+
+  > span {
+    display: block;
+    margin: 30px 0;
+    font-size: 18px;
+    color: $primary-green;
+  }
+
+  select {
+    font-size: 16px;
+    border: none;
+    border-bottom: 4px solid $primary-green;
+    color: $primary-black;
+    padding: 10px 40px 10px 10px;
+    width: auto;
+    -webkit-appearance: none;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50px' height='50px'><polyline points='46.139,15.518 25.166,36.49 4.193,15.519'/></svg>") right no-repeat;
+    background-transparency: 0.5;
+    background-position: right 10px top 14px;
+    background-size: 18px 18px;
+    border-radius: 0;
+    margin: 0 10px;
+    min-width: 50px;
+    overflow: hidden;
+  }
+
+  button {
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .btn-submit{
+    color: white;
+    background-color: $primary-black;
+    border: 2px solid $primary-black;
+
+    &:hover{
+      color: $primary-black;
+      border: 2px solid $primary-black;
+      background-color: white !important;
+    }
+  }
+
+  .action-editor-heading {
+    margin: 0 10px;
+
+    h1 {
+      display: inline-block;
+      font-size: 16px;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    input[type="text"] {
+      border: none;
+      border-bottom: 4px solid $primary-green;
+      font-size: 20px;
+      background-color: transprent;
+    }
+  }
+
+  .action-editor-list {
+    ol {
+      padding-left: 20px;
+      font-size: 17px;
+    }
+
+    .conditions {
+      margin-top: 10px;
+
+      label {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 300;
+        margin: 0;
+      }
+
+      .conditionName {
+        border: none;
+        border-bottom: 4px solid black;
+        font-size: 20px;
+      }
+
+      .conditionError{
+        background-color: #FDD;
+        border-color: #F99;
+      }
+
+      .conditionExpression {
+        margin: 15px 0;
+
+        .conditionValue {
+          border: none;
+          border-bottom: 4px solid $primary-black;
+          font-size: 20px;
+          padding-bottom: 10px;
+        }
+      }
+    }
+  }
+
+  .action-editor-email {
+    .action-editor-text{
+      margin-top: 20px;
+
+      label {
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 300;
+        margin: 0;
+        width: 35%;
+      }
+
+      input[type="text"] {
+        border: none;
+        border-bottom: 4px solid $primary-black;
+        font-size: 20px;
+        width: 60%;
+        background-color: transparent;
+      }
+
+    }
+  }
+
+  .action-editor-insert{
+    > span{
+      margin: 0 10px;
+    }
+  }
+
+  .article-btn{
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: normal;
+    border: 0;
+    padding: 0 10px;
+    background: $primary-green;
+    text-align: center;
+    line-height: 40px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    cursor: pointer;
+    margin: 10px;
+    min-width: 100px;
+    border-radius: 5px;
+
+    &:hover{
+      background: $primary-black;
+    }
+  }
+}
+
+.test-run-block{
+  padding-top: 40px;
+  border-bottom: 4px dotted $primary-black;
+  text-align: center;
+
+  button{
+    display: inline-block;
+    font-size: 15px;
+    font-weight: normal;
+    border: 0;
+    padding: 0 10px;
+    background: $primary-black;
+    text-align: center;
+    line-height: 40px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    cursor: pointer;
+    min-width: 100px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+}
+
+.ontask-clock{
+
+  width: 100%;
+
+  > span{
+    width: 100px;
+    padding-left: 30px;
+  }
+
+  i{
+    font-size: 25px;
+  }
+}
+
+.action-block{
+  margin: 30px 0;
+}
+
+.rule-schedule-wrap{
+
+  .rule-schedule-title{
+    font-size: 16px;
+    padding: 10px;
+    font-weight: bold;
+    margin-top: 3px;
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+
+    #rule-schedule-toggle{
+      cursor: pointer;
+    }
+  }
+
+  ul{
+    padding: 0;
+
+    li{
+      display: block;
+      font-size: 16px;
+      padding: 10px;
+      margin-top: 3px;
+      border: 1px solid #f0f0f0;
+      border-radius: 5px;
+
+      .rule-schedule-lable{
+        margin: 0 !important;
+      }
+
+      i{
+        float: right;
+      }
+    }
+
+  }
+}
+
+
+
+/*--------------------- add check box style -----------------*/
+.onoffswitch {
+    position: relative; width: 65px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    float: right;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid transparent; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 24px; padding: 0; line-height: 24px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #86BC42; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 3px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 37px;
+    border: 2px solid transparent; border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+    height: 18px;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+
+.action-notification-type-heading{
+  font-size: 20px;
+  float: right;
+}
+
+/*--------------custom attribute ------------------------*/
+.customAttributeContainer{
+  padding: 20px;
+
+  .centerButton{
+    text-align: left;
+
+    .centerButton-btn{
+      display: inline-block;
+      padding: 0 20px;
+      background: $primary-green;
+      text-align: center;
+      line-height: 40px;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      cursor: pointer;
+      margin: 10px 10px 0 0;
+      border-radius: 5px;
+      width: auto;
+      min-width: 200px;
+
+      &:hover{
+        background: $primary-black;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .customAttributeName{
+    border: none;
+    border-bottom: 4px solid #242c42;
+    font-size: 20px;
+    background-color: transparent;
+    width: 80%;
+  }
+
+  .customAttributeValue{
+    border: none;
+    border-bottom: 4px solid #242c42;
+    font-size: 20px;
+    background-color: transparent;
+    width: 80%;
+  }
+
+  .article-small-btn{
+
+    display: inline-block;
+    padding: 0 20px;
+    background: $primary-red;
+    text-align: center;
+    line-height: 40px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    cursor: pointer;
+    margin: 10px 10px 0 0;
+    border-radius: 5px;
+    width: auto;
+
+    &:hover{
+      background: $primary-green;
+    }
+
+  }
+}
+
+.customAttributeList{
+  ul{
+    padding: 20px;
+
+    li{
+      display: block;
+
+      i{
+        margin-right: 20px;
+      }
+    }
+  }
+
+  span{
+    padding-right: 10px;
+  }
+}
+
+#customAttributeArea{
+  > div{
+    border-bottom: 1px dashed $primary-green;
+  }
+}
+
+.action-editor-list{
+  padding-right: 30px;
+}
+
+.grid-insert-condition{
+  border: 3px solid $primary-green;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.internal-transformer-wrap{
+  margin-top: 1.5em;
+  padding-top: 1.5em;
+  border-top: 3px dashed $primary-green;
+  width: 90%;
+  }

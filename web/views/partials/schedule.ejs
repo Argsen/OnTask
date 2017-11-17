@@ -1,0 +1,278 @@
+<!-- views/partials/schedule.ejs -->
+
+<div class="action-editor-text" style="display:none">
+  <label>Schedule (Please use cron job syntax): </label>
+  <input type="text" id="ruleSchedule" /><br>
+</div>
+
+<section class="action-block">
+  <span><i class="fa fa-info" aria-hidden="true"></i>&nbsp;Schedule Your Rule</span><span style="color: red; font-size: 150%"> (Demo only, not working, using Run to execute instead)</span>
+  <div class="grid">
+    <div class="grid__cell ">
+      <div class="input-group clockpicker ontask-clock">
+        <input type="text" class="form-control" value="09:30">
+        <span class="input-group-addon">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+          </span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="grid rule-schedule-wrap">
+    <div class="grid__cell rule-schedule-title">
+
+      <span style="float:left;">Repeat</span>
+      <span style="float:right;" id="rule-schedule-toggle"><span>Never</span>
+      <i class="fa fa-chevron-right" aria-hidden="true"></i> </span>
+    </div>
+
+    <div class="grid__cell">
+      <ul>
+        <li style="display: none;"><span class="rule-schedule-lable">Every Sunday</span>
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="rule-schedule-sunday">
+            <label class="onoffswitch-label" for="rule-schedule-sunday">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>
+        </li>
+        <li style="display: none;"><span class="rule-schedule-lable">Every Monday</span>
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="rule-schedule-monday">
+            <label class="onoffswitch-label" for="rule-schedule-monday">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>
+        </li>
+        <li style="display: none;"><span class="rule-schedule-lable">Every Tuesday</span>
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="rule-schedule-tuesday">
+            <label class="onoffswitch-label" for="rule-schedule-tuesday">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>
+        </li>
+        <li style="display: none;"><span class="rule-schedule-lable">Every Wednesday</span>
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="rule-schedule-wednesday">
+            <label class="onoffswitch-label" for="rule-schedule-wednesday">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>
+        </li>
+        <li style="display: none;"><span class="rule-schedule-lable">Every Thursday</span>
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="rule-schedule-thursday">
+            <label class="onoffswitch-label" for="rule-schedule-thursday">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>
+        </li>
+        <li style="display: none;"><span class="rule-schedule-lable">Every Friday</span>
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="rule-schedule-friday">
+            <label class="onoffswitch-label" for="rule-schedule-friday">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>
+        </li>
+        <li style="display: none;"><span class="rule-schedule-lable">Every Saturday</span>
+          <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="rule-schedule-saturday">
+            <label class="onoffswitch-label" for="rule-schedule-saturday">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ClockPicker script -->
+<script type="text/javascript" src="/bower_components/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
+
+<script type="text/javascript">
+  /*--------------------- use clockpicker-------------------*/
+  $('.clockpicker').clockpicker({
+    donetext: 'Done',
+    align: 'left',
+    placement: 'top'
+  });
+
+  var checkList = [];
+
+  $(document).ready(function() {
+
+    /*------------------------ toggle windows --------------*/
+    var $ruleScheduleToggle = $("#rule-schedule-toggle");
+
+    $ruleScheduleToggle.on("click", function() {
+
+      checkList.length = 0;
+
+      $(".rule-schedule-wrap ul li").slideToggle('fast');
+
+      $(".rule-schedule-wrap ul li").each(function(){
+
+        var checked = $(this).find("input").prop("checked");
+
+        if(checked){
+          var label = $(this).find(".rule-schedule-lable").text();
+          checkList.push(label);
+        }else{
+
+        };
+
+      });
+
+      var $ruleScheduleToggle = $("#rule-schedule-toggle");
+
+      if(checkList){
+        var dayLabel = "";
+        $ruleScheduleToggle.empty();
+
+        for(var day in checkList){
+          switch (checkList[day]) {
+            case "Every Sunday":
+              dayLabel = dayLabel + "Sun" + " ";
+              break;
+            case "Every Monday":
+              dayLabel = dayLabel + "Mon" + " ";
+              break;
+            case "Every Tuesday":
+              dayLabel = dayLabel + "Tue" + " ";
+              break;
+            case "Every Wednesday":
+              dayLabel = dayLabel + "Wed" + " ";
+              break;
+            case "Every Thursday":
+              dayLabel = dayLabel + "Thu" + " ";
+              break;
+            case "Every Friday":
+              dayLabel = dayLabel + "Fri" + " ";
+              break;
+            case "Every Saturday":
+              dayLabel = dayLabel + "Sat" + " ";
+              break;
+            default:
+
+          }
+
+        }
+
+        switch (dayLabel) {
+          case "Mon Tue Wed Thu Fri ":
+            dayLabel = "Weekdays";
+            break;
+          case "Sun Sat ":
+            dayLabel = "Weekend";
+            break;
+          default:
+
+        }
+
+        var span = $("<span>" + dayLabel + "</span><i class=\"fa fa-chevron-right\" aria-hidden=\"true\"></i>");
+
+        $ruleScheduleToggle.append(span);
+      }else{
+
+        $ruleScheduleToggle.empty();
+        var span = $("<span> Never </span><i class=\"fa fa-chevron-right\" aria-hidden=\"true\"></i>");
+        $ruleScheduleToggle.append(span);
+      };
+
+      createJobSyntax(checkList, function(res){
+        var $ruleSchedule = $("#ruleSchedule");
+        $ruleSchedule.val(res);
+      })
+
+    });
+
+    $ruleScheduleToggle.trigger("click");
+
+
+  });
+
+  var createJobSyntax = function(checkList, callback){
+
+    var time = $(".ontask-clock input").val();
+    var cronJobSyntaxStr = "";
+
+    cronJobSyntaxStr = time.split(":")[1] + " " + time.split(":")[0] + " * * ";
+
+    for(var i=0;i<checkList.length; i++){
+      switch (i) {
+        case 0:
+            switch (checkList[i]) {
+              case "Every Sunday":
+                cronJobSyntaxStr = cronJobSyntaxStr + "0";
+                break;
+              case "Every Monday":
+                cronJobSyntaxStr = cronJobSyntaxStr + "1";
+                break;
+              case "Every Tuesday":
+                cronJobSyntaxStr = cronJobSyntaxStr + "2";
+                break;
+              case "Every Wednesday":
+                cronJobSyntaxStr = cronJobSyntaxStr + "3";
+                break;
+              case "Every Thursday":
+                cronJobSyntaxStr = cronJobSyntaxStr + "4";
+                break;
+              case "Every Friday":
+                cronJobSyntaxStr = cronJobSyntaxStr + "5";
+                break;
+              case "Every Saturday":
+                cronJobSyntaxStr = cronJobSyntaxStr + "6";
+                break;
+              default:
+            }
+          break;
+        default:
+          switch (checkList[i]) {
+            case "Every Sunday":
+              cronJobSyntaxStr = cronJobSyntaxStr + "," + "0";
+              break;
+            case "Every Monday":
+              cronJobSyntaxStr = cronJobSyntaxStr + "," + "1";
+              break;
+            case "Every Tuesday":
+              cronJobSyntaxStr = cronJobSyntaxStr + "," + "2";
+              break;
+            case "Every Wednesday":
+              cronJobSyntaxStr = cronJobSyntaxStr + "," + "3";
+              break;
+            case "Every Thursday":
+              cronJobSyntaxStr = cronJobSyntaxStr + "," + "4";
+              break;
+            case "Every Friday":
+              cronJobSyntaxStr = cronJobSyntaxStr + "," + "5";
+              break;
+            case "Every Saturday":
+              cronJobSyntaxStr = cronJobSyntaxStr + "," + "6";
+              break;
+            default:
+
+          }
+          break;
+      }
+
+    };
+
+    return callback(cronJobSyntaxStr);
+
+  };
+</script>

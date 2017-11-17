@@ -1,0 +1,218 @@
+<link rel="stylesheet" href="styles/queryBuilder/bootstrap.min.css" id="bt-theme">
+<link rel="stylesheet" href="styles/queryBuilder/bootstrap-select.min.css">
+<link rel="stylesheet" href="styles/queryBuilder/awesome-bootstrap-checkbox.css">
+<link rel="stylesheet" href="styles/queryBuilder/bootstrap-slider.min.css">
+<link rel="stylesheet" href="styles/queryBuilder/selectize.bootstrap3.css">
+<link rel="stylesheet" href="styles/queryBuilder/query-builder.default.css" id="qb-theme">
+<link rel="stylesheet" href="styles/jquery-te-1.4.0.css">
+
+
+<script src="js/queryBuilder/jquery.js"></script>
+<script src="js/queryBuilder/bootstrap.min.js"></script>
+<script src="js/queryBuilder/bootstrap-select.min.js"></script>
+<script src="js/queryBuilder/bootbox.js"></script>
+<script src="js/queryBuilder/bootstrap-slider.min.js"></script>
+<script src="js/queryBuilder/microplugin.js"></script>
+<script src="js/queryBuilder/selectize.min.js"></script>
+<script src="js/queryBuilder/jQuery.extendext.min.js"></script>
+<script src="js/queryBuilder/sql-parser.js"></script>
+<script src="js/queryBuilder/doT.js"></script>
+<script src="js/queryBuilder/interact.js"></script>
+<script src="js/queryBuilder/query-builder.js"></script>
+<script src="js/dependencies/jquery-te-1.4.0.min.js"></script>
+
+<!--<div class="container">-->
+  <!--<div class="col-md-12 col-lg-10 col-lg-offset-1">-->
+    <!--<div id="builder"></div>-->
+
+    <!--<div class="btn-group">-->
+      <!--<button class="btn btn-danger reset">Reset</button>-->
+      <!--<button class="btn btn-warning set-filters" data-toggle="tooltip" title="Adds a filter 'New filter' and removes 'Coordinates', 'State', 'BSON'" data-container="body" data-placement="bottom">Set filters</button>-->
+    <!--</div>-->
+
+    <!--<div class="btn-group">-->
+      <!--<button class="btn btn-default" disabled>Get:</button>-->
+      <!--<button class="btn btn-primary parse-sql" data-stmt="false">SQL</button>-->
+    <!--</div>-->
+
+    <!--<div id="result" class="hide">-->
+      <!--<h3>Output</h3>-->
+      <!--<pre></pre>-->
+    <!--</div>-->
+
+    <!--<div id="action" style="margin-top: 30px;">-->
+      <!--<label>Action Name: </label><br>-->
+      <!--<input /><br>-->
+      <!--<label>Action: </label><br>-->
+      <!--<input type="checkbox" />Email: <input /><br>-->
+      <!--<input type="checkbox" />Notification: <input /><br>-->
+      <!--<label>Action Content: </label><br>-->
+      <!--<textarea></textarea><br>-->
+
+      <!--<label>Schedule (Please use cron job syntax): </label><br>-->
+      <!--<input /><br>-->
+      <!--<label>Description: </label><br>-->
+      <!--<input /><br>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!--<hr>-->
+
+<!--<div>-->
+  <!--<form id="uploadForm" enctype="multipart/form-data">-->
+    <!--&lt;!&ndash;<input type="file" name="uploadFile" id="uploadFile" multiple accept="text/plain" />&ndash;&gt;-->
+    <!--<input type="file" name="uploadFile" id="uploadFile" />-->
+    <!--<input type="submit" value="submit" id="uploadSubmit" />-->
+  <!--</form>-->
+
+  <!--<button id="exportFile">Export</button>-->
+
+  <!--<hr>-->
+
+    <!--<input type="text" name="host" id="dbHost" />-->
+    <!--<input type="text" name="user" id="dbUser" />-->
+    <!--<input type="text" name="password" id="dbPassword" />-->
+    <!--<input type="text" name="database" id="dbDatabase" />-->
+    <!--<button id="dbSubmit">Submit</button>-->
+
+
+<!--</div>-->
+
+<!--<hr>-->
+
+
+<!--<button id="createConstraints">Create Constraints</button>-->
+<!--<button id="dataTransfer">Data Transfer</button>-->
+
+
+<!--<hr>-->
+<!--<hr>-->
+<!--<hr>-->
+
+<!--<div>-->
+  <!--<p>Internal transformer</p>-->
+
+  <!--<label>New Column Name: </label>-->
+  <!--<input id="transform_new_column_name" />-->
+  <!--<label>New Column Equation: </label>-->
+  <!--<select id="transform_column"></select>-->
+  <!--<button id="transform_column_insert">Insert</button>-->
+  <!--<select id="transform_operator">-->
+    <!--<option value="+">+</option>-->
+    <!--<option value="-">-</option>-->
+    <!--<option value="*">*</option>-->
+    <!--<option value="/">/</option>-->
+    <!--<option value="%">%</option>-->
+    <!--<option value="(">(</option>-->
+    <!--<option value=")">)</option>-->
+  <!--</select>-->
+  <!--<button id="transform_operator_insert">Insert</button>-->
+
+  <!--<div id="transform_equation" style="height: 100px; width: 500px; border: 1px solid black;"></div>-->
+
+  <!--<button id="transform_clear">Clear</button>-->
+  <!--<button id="transform_confirm">Confirm</button>-->
+<!--</div>-->
+
+
+<!--<hr>-->
+<!--<hr>-->
+<!--<hr>-->
+<!--<hr>-->
+
+<!--<div>-->
+  <!--<article class="action-editor-wrap">-->
+    <!--<span>Step 1: Name your rule</span>-->
+    <!--<div class="action-editor-heading">-->
+      <!--<h1>Rule Name: </h1>-->
+      <!--<input type="text" id="ruleName" /><br>-->
+    <!--</div>-->
+    <!--<span>Step 2: Add new conditions</span>-->
+    <!--<div class="action-editor-list">-->
+      <!--<ol id="conditions"></ol>-->
+      <!--<button id="addCondition"><i class="fa fa-plus-circle" aria-hidden="true"></i><h5>add new condition</h5></button>-->
+      <!--<button id="confirmCondition"><i class="fa fa-check-circle" aria-hidden="true"></i><h5>confirm</h5></button>-->
+    <!--</div>-->
+
+    <!--<span>Step 3: Insert your conditions</span>-->
+
+    <!--<div class="action-editor-insert">-->
+      <!--<select id="selectKey"></select>-->
+      <!--<button id="insertKey"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><h5>insert</h5></button>-->
+      <!--<select id="selectCondition"></select>-->
+      <!--<select id="selectBoolean">-->
+        <!--<option>True</option>-->
+        <!--<option>False</option>-->
+      <!--</select>-->
+      <!--<button id="insertCondition"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i><h5>insert</h5></button>-->
+    <!--</div>-->
+
+    <!--<span>Step 4: arrange email template & schedule your rule</span>-->
+    <!--<div id="action" style="margin-top: 10px;" class="query-input action-editor-email">-->
+      <!--<textarea id="ruleAction" style="display: block; width: 90%; margin-top: 100px;" rows="5"></textarea>-->
+      <!--<div class="action-editor-text">-->
+        <!--<label>Schedule (Please use cron job syntax): </label>-->
+        <!--<input type="text" id="ruleSchedule" /><br>-->
+      <!--</div>-->
+      <!--<div class="action-editor-text">-->
+        <!--<label>Description: </label>-->
+        <!--<input type="text" id="ruleDescription" /><br>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<span>Step 5: Submit rule to system</span>-->
+    <!--<div>-->
+      <!--<button style="margin-bottom: 20px;" id="actionSubmit" class="btn btn-submit"><i class="fa fa-upload" aria-hidden="true"></i> &nbsp;Submit</button>-->
+    <!--</div>-->
+  <!--</article>-->
+<!--</div>-->
+
+
+
+
+<!--<hr>-->
+<!--<hr>-->
+<!--<hr>-->
+<!--<hr>-->
+<!--<p>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;13/02/2017-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+<!--<hr>-->
+<!--<hr>-->
+<!--<hr>-->
+<!--<hr>-->
+
+<div>
+  <p>Test with ldapjs module</p>
+  <label>User name</label>
+  <input id="ldapjs_username" />
+  <label>Password</label>
+  <input id="ldapjs_password" />
+  <button id="ldapjs_button">Submit</button>
+</div>
+
+<p>----------------------------------------------------------------------------------------------------------------------------------------------</p>
+
+<div>
+  <p>Test with active directory module</p>
+  <label>User name</label>
+  <input id="activeDirectory_username" />
+  <label>Password</label>
+  <input id="activeDirectory_password" />
+  <button id="activeDirectory_button">Submit</button>
+</div>
+
+
+<!--<div>-->
+  <!--<h1>Data Association Area</h1>-->
+  <!--<button id="createPK">Create Primary Key</button>-->
+  <!--<button id="addC">Add Column</button>-->
+  <!--<button id="deleteC">Delete Column</button>-->
+<!--</div>-->
+
+<!--<script src="bower_components/tinymce/tinymce.min.js"></script>-->
+<!--<script src="js/upload.js"></script>-->
+<!--<script src="js/export.js"></script>-->
+<!--<script src="js/FileSaver.min.js"></script>-->
+<!--<script src="js/rule.js"></script>-->
+<!--<script src="js/list.js"></script>-->
+<script src="js/temp.js"></script>

@@ -1,0 +1,63 @@
+<% include ../partials/header %>
+
+<% include ../partials/navigation %>
+
+<% include ../partials/loading %>
+
+<% include ../partials/headerPlaceholder %>
+
+<section class="action main-section">
+  <div class="grid">
+    <div class="grid__cell main-window padding-10">
+      <div class="export-button">
+        <button class="btn btn-normal" id="notificationExport"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;Export Notification Records</button>
+      </div>
+      <table id="table_id" class="display">
+        <thead>
+        <tr>
+          <th>Email</th>
+          <th>Info</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Read</th>
+          <th>Created Time</th>
+        </tr>
+        </thead>
+        <!--<tbody>-->
+        <!--</tbody>-->
+        <tfoot>
+        <tr>
+          <th>Email</th>
+          <th></th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Read</th>
+          <th>Created Time</th>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <div class="workflow-create-form modal" id="display-modal" style="display:none;">
+    <h3 class="red">Content &nbsp;<i class="fa fa-envelope-o" aria-hidden="true"></i></h3>
+    <article id="display-content">
+
+    </article>
+    <br>
+    <div class="workflow-create-form-button-group">
+      <button class="btn btn-cancel" onclick="$.modal.close();">
+      <span>Cancel <i class="fa fa-ban" aria-hidden="true"></i></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script src="/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/js/export.js"></script>
+<script src="/js/FileSaver.min.js"></script>
+<script src="/js/action/ruleNotification.js"></script>

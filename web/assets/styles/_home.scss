@@ -1,0 +1,613 @@
+$primary-green: #86bc42;
+$primary-black: #242c42;
+$primary-red: #c9302c;
+
+
+span{
+  &:hover{
+    cursor: default;
+  }
+}
+
+.section {
+  padding-top: 40px;
+}
+
+.group-title-index {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+  color: #49575f;
+
+  .top-title {
+    text-transform: uppercase;
+    margin: 0 0 15px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  .center-title {
+    font-size: 30px;
+    font-weight: 900;
+    margin: 0 0 15px;
+    text-transform: uppercase;
+    line-height: 30px;
+  }
+
+  .bottom-title {
+    position: relative;
+    display: inline-block;
+
+    .bottom-icon {
+      margin: 0 5px;
+      font-size: 26px;
+      color: #86bc42;
+    }
+  }
+}
+
+.edugate-layout-1 {
+  position: relative;
+  width: 100%;
+  display: table;
+  background-color: #fafafa;
+  margin-top: 120px;
+  transition: all 0.3s linear;
+
+  &:hover {
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+
+    .edugate-content {
+      .title {
+        color: $primary-green;
+      }
+    }
+  }
+
+  .edugate-image {
+    width: 900px;
+    height: 400px;
+    position: relative;
+    top: -30px;
+    padding-left: 30px;
+    display: table-cell;
+
+    img {
+      height: auto;
+      width: auto;
+    }
+  }
+
+  .edugate-content {
+    width: 55%;
+    padding: 50px 30px 30px;
+
+    .title {
+      font-size: 30px;
+      margin: 0 0 6px;
+      max-height: 84px;
+      overflow: hidden;
+      text-transform: capitalize;
+      color: $primary-black;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      height: 96px;
+      overflow: hidden;
+    }
+  }
+}
+
+.edugate-content {
+  display: table-cell;
+  vertical-align: top;
+  text-align: left;
+
+  .description {
+    color: #6f8190;
+    display: inline-block;
+    width: 100%;
+    line-height: 24px;
+  }
+}
+
+.btn-latest-new {
+  margin: 50px auto 0;
+  display: block;
+}
+/*-----------------move partly (overflow) scss to home.scss---------------------- */
+.col-style {
+  width: 100%;
+  padding: 0 15px;
+  float: left;
+  margin-bottom: 90px;
+  transition: all 0.5s ease-in-out;
+}
+
+.workflow-layout {
+  position: relative;
+  width: 90%;
+  transition: all 0.3s linear;
+
+  &:hover {
+    &:before {
+      background-color: #fff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    }
+
+    &:after {
+      height: 100%;
+    }
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fafafa;
+    border-left: 5px solid #eaedf5;
+    //transition: all 0.3s linear;
+  }
+
+  &:after {
+    position: absolute;
+    z-index: 2;
+    content: '';
+    width: 5px;
+    top: 0;
+    left: 0;
+    height: 0;
+    // background-color: #242c42;
+    border-left: 5px solid #eaedf5;
+    //transition: all 0.5s ease;
+  }
+}
+
+.workflow-layout-2-wrapper {
+  padding: 30px 0 30px 30px;
+  display: table;
+  width: 100%;
+}
+
+.workflow-content {
+  display: table-cell;
+  vertical-align: top;
+  text-align: left;
+  padding-right: 30px;
+  position: relative;
+
+  .name {
+    border-bottom: 4px solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .description {
+    height: 96px;
+    overflow: hidden;
+    color: #6f8190;
+    display: inline-block;
+    width: 100%;
+    line-height: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+
+  .btn-margin {
+    width: 90%;
+    min-width: 80px;
+    margin: 10px;
+    min-height: 100px;
+  }
+}
+
+.pagination {
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  width: 100%;
+
+  .pagination__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .pagination .pagination__list .pagination__next,
+    .pagination__previous {
+      position: relative;
+      top: 1px;
+      line-height: 36px;
+    }
+  }
+
+  .disable {
+    background-color: #ccc !important;
+    pointer-events: none;
+    color: #fff;
+  }
+
+  .active {
+    background-color: #242c42;
+    cursor: pointer;
+  }
+}
+
+.btn-squae {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  background-color: #86bc42;
+  display: inline-block;
+  font-family: Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.2s linear;
+
+  &:hover {
+    background-color: #86bc42;
+    color: #fff;
+  }
+}
+
+.overview-section {
+  display: inline-block;
+  width: 100%;
+}
+
+.header-main-wrapper {
+  height: 60px;
+}
+
+.header-sub-wrapper {}
+
+.header-main {
+  width: 100%;
+  background-color: #fff;
+  /* box-shadow: 3px 0 7px rgba(0, 0, 0, 0.3); */
+  border-bottom: 3px solid #86bc42;
+  position: fixed;
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
+}
+
+.overview-large-heading {
+  font-size: 30px;
+  font-weight: bold;
+  padding: 15px 15px 0 15px;
+  margin: 30px;
+
+  .overview-sub-heading {
+    font-size: 12px;
+  }
+
+  img{
+    height: 32px;
+    margin: 2px;
+  }
+}
+
+.logo {
+  margin: 10px 0;
+}
+
+.overview-input {
+  //margin-top: 20px;
+  //margin-right: 30px;
+  span {
+    border: 4px solid #737373;
+    padding: 10px;
+    border-radius: 30px;
+  }
+
+  input[type="text"] {
+    color: #737373;
+    font-size: 18px;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.overview-search-button {
+  font-size: large;
+  border: none;
+  background-color: white;
+  color: #737373;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.overview-sub {
+  padding: 20px;
+}
+
+.userName {
+  color: $primary-green;
+}
+
+.green {
+  color: $primary-green;
+}
+
+.red {
+  color: $primary-red;
+}
+
+.rule-button-container {
+  padding: 15px;
+}
+
+.intro_text {
+  background-color: #e4e9ed;
+  color: #0b3f66;
+  padding: 60px 0;
+
+  .wrap {
+    margin: 0 auto;
+    max-width: 1140px;
+  }
+
+  h1 {
+    color: #0b3f66;
+    font-weight: 400;
+    font-size: 26px;
+  }
+}
+
+.logo-set {
+  padding: 40px 0;
+
+  .wrap {
+    margin: 0 auto;
+    max-width: 1140px;
+  }
+
+  .aligncenter {
+    margin: 0 auto;
+  }
+
+  a {
+    color: #0b3f66;
+    text-decoration: none;
+  }
+}
+/*------------ home -------------------*/
+.login-submit {
+  display: inline-block;
+  padding-bottom: 5px;
+
+  .password-retrieve{
+    color: $primary-green;
+    position: absolute;
+
+  }
+
+  #passwordRetrieve {
+    color: $primary-green;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.logo-set {
+  p {
+    margin: 40px 0 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+}
+
+.site-footer {
+  background-color: #fff;
+  border-top: 3px solid rgba(0, 0, 0, 0.3);
+  /* border-top-color: #bbc9d2; */
+  /* border-top-style: solid; */
+  /* border-top-width: 1px; */
+  /* padding-bottom: 20px; */
+  /* padding-top: 20px; */
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 20px 0;
+  text-align: center;
+  text-transform: uppercase;
+
+  .wrap {
+    margin: 0 auto;
+    max-width: 1140px;
+    text-align: center;
+
+    .footer-small {
+      font-size: 11px;
+      text-transform: initial;
+      line-height: 1.3;
+      margin-top: 10px;
+    }
+
+    p {
+      color: #9397a2;
+      a{
+        color: #9397a2;
+        &:hover {
+          color: #0b3f66;
+        }
+      }
+    }
+  }
+}
+
+.login-table{
+  text-align: left;
+  padding: 20px 100px 50px 100px;
+  span{
+    margin: 0;
+  }
+
+  .login-span{
+    margin-left: 20px;
+  }
+
+  .login-form{
+    margin-top: 30px;
+  }
+
+  .form-margin-bottom{
+    margin-left: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+
+    label{
+      font-weight: lighter;
+    }
+  }
+}
+
+.form-margin-bottom{
+  img{
+    height: 24px;
+    margin-right: 10px;
+  }
+}
+
+.error-hint{
+  &:active{
+    box-shadow: 0 0 5px rgba(216, 34, 13, 0.7) !important;
+  }
+  &:focus{
+    box-shadow: 0 0 5px rgba(216, 34, 13, 0.7) !important;
+  }
+}
+
+
+.tooltip-wrapper {
+  text-transform: capitalize;
+  background: #fff;
+  color: #555;
+  cursor: default;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  /* margin: 100px 75px 10px 75px; */
+  padding: 15px 5px 5px 5px;
+  position: relative;
+  text-align: center;
+  -webkit-transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tooltip-wrapper .tooltip {
+  background: rgba(216, 34, 13, 0.7);
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 20px;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.tooltip-wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+/* CSS Triangles - see Trevor's post */
+.tooltip-wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid rgba(216, 34, 13, 0.7) 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 50%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+
+
+
+// .tooltip-wrapper:hover .tooltip {
+//   opacity: 1;
+//   pointer-events: auto;
+//   -webkit-transform: translateY(0px);
+//      -moz-transform: translateY(0px);
+//       -ms-transform: translateY(0px);
+//        -o-transform: translateY(0px);
+//           transform: translateY(0px);
+// }
+
+.overview-new-workflow-style{
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  color: #86bc42;
+  padding-left: 15px;
+
+  img{
+    height:18px;
+  }
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.indicator-img{
+  width: 128px;
+  margin-top: 15%;
+  margin-left: 40%;
+  z-index: 9999999;
+  &:hover{
+    cursor: pointer;
+  }
+}

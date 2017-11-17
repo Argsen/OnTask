@@ -1,0 +1,24 @@
+{
+  "name": "OnTask_SimpleQueue",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "csv-parse": "^1.2.0",
+    "kue": "^0.11.5",
+    "mysql": "^2.13.0",
+    "nodemailer": "^3.1.4",
+    "require-dir": "^0.3.2",
+    "unzip": "^0.1.11",
+    "xlsx": "^0.11.8"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "repository": {},
+  "author": "Harry Cui",
+  "license": ""
+}

@@ -1,0 +1,128 @@
+<div class="1/4 grid__cell">
+  <div class="grid">
+    <div class="grid__cell">
+      <div class="directory-list">
+        <ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="3/4 grid__cell main-window padding-10">
+
+  <div class="tabordion">
+    <section id="section1">
+      <input type="radio" name="sections" id="option1" checked>
+      <label for="option1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</label>
+      <article class="action-editor-wrap">
+        <!--<div id="builder"></div>-->
+
+        <!--<div class="btn-group">-->
+        <!--<button class="btn btn-danger reset">Reset</button>-->
+        <!--<button class="btn btn-warning set-filters" data-toggle="tooltip" title="Adds a filter 'New filter' and removes 'Coordinates', 'State', 'BSON'" data-container="body" data-placement="bottom">Set filters</button>-->
+        <!--</div>-->
+
+        <!--<div class="btn-group">-->
+        <!--<button class="btn btn-default" disabled>Get:</button>-->
+        <!--<button class="btn btn-primary parse-sql" data-stmt="false">SQL</button>-->
+        <!--</div>-->
+
+        <!--<div id="result" class="hide">-->
+        <!--<h3>Output</h3>-->
+        <!--<pre></pre>-->
+        <!--</div>
+        <span>Step 1: Name your rule</span>
+        <div class="action-editor-heading">
+          <h1>Rule Name: </h1>
+          <input type="text" id="ruleName" /><br>
+        </div>
+        <span>Step 2: Add new conditions</span>
+        <div class="action-editor-list">
+          <ol id="conditions"></ol>
+
+          <!-- insert jquery 1.x in order to load query builder, will trigger $.noConflict() in the rule.js to restore 2.x version -->
+          <link href="/styles/queryBuilder/bootstrap.min.css" rel="stylesheet">
+          <link href="/styles/queryBuilder/bootstrap-select.min.css" rel="stylesheet">
+          <link href="/styles/queryBuilder/query-builder.default.css" rel="stylesheet">
+          <script src="/js/queryBuilder/jquery.min.js"></script>
+          <script src="/js/queryBuilder/jQuery.extendext.min.js"></script>
+          <script src="/js/queryBuilder/bootstrap.min.js"></script>
+          <script src="/js/queryBuilder/doT.js"></script>
+          <script src="/js/queryBuilder/query-builder.js"></script>
+          <script src="/js/rule.js"></script>
+          <!-- end of inserting query builder dependencies -->
+
+          <button id="addCondition"><i class="fa fa-plus-circle" aria-hidden="true"></i><h5>add new condition</h5></button>
+          <button id="confirmCondition"><i class="fa fa-check-circle" aria-hidden="true"></i><h5>confirm</h5></button>
+        </div>
+
+        <span>Step 3: Insert your conditions</span>
+
+        <div class="action-editor-insert">
+          <select id="selectKey"></select>
+          <button id="insertKey"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><h5>insert</h5></button>
+          <select id="selectCondition"></select>
+          <select id="selectBoolean">
+            <option>True</option>
+            <option>False</option>
+          </select>
+          <button id="insertCondition"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i><h5>insert</h5></button>
+          <select id="selectCustomAttribute"></select>
+          <button id="insertCustomAttribute"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><h5>insert</h5></button>
+        </div>
+
+        <span>Step 4: arrange email template & schedule your rule</span>
+        <div id="action" style="margin-top: 10px;" class="query-input action-editor-email">
+          <textarea id="ruleAction" style="display: block; width: 90%; margin-top: 100px;" rows="5"></textarea>
+          <div class="action-editor-text">
+            <label>Schedule (Please use cron job syntax): </label>
+            <input type="text" id="ruleSchedule" /><br>
+          </div>
+          <div class="action-editor-text">
+            <label>Description: </label>
+            <input type="text" id="ruleDescription" /><br>
+          </div>
+        </div>
+
+        <span>Step 5: Submit rule to system</span>
+        <div>
+          <button style="margin-bottom: 20px;" id="actionSubmit" class="btn btn-submit"><i class="fa fa-upload" aria-hidden="true"></i> &nbsp;Submit</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="section2">
+      <input type="radio" name="sections" id="option2">
+      <label for="option2"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</label>
+      <article style="text-align:center">
+        <h1><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp; &nbsp; Want to delete this actions?</h1>
+        <br>
+        <input type="button" class="btn btn-green" value="yes" />
+        <input type="button" class="btn btn-green" value="no" />
+      </article>
+    </section>
+    <section id="section3">
+    <input type="radio" name="sections" id="option3">
+    <label for="option3"><i class="fa fa-play" aria-hidden="true"></i> Run</label>
+    <article style="text-align:center">
+      <h1><i class="fa fa-play" aria-hidden="true"></i>&nbsp; &nbsp; Want to run this actions?</h1>
+      <br>
+      <input type="button" class="btn btn-green" value="yes" id="runRule" />
+      <input type="button" class="btn btn-green" value="no" />
+    </article>
+  </section>
+  <!-- <section id="section4">
+    <input type="radio" name="sections" id="option4">
+    <label for="option4"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Schedule</label>
+    <article>
+    </article>
+  </section> -->
+    <!-- <section id="section5">
+      <input type="radio" name="sections" id="option5">
+      <label for="option5"><i class="fa fa-upload" aria-hidden="true"></i> Export</label>
+      <article>
+      </article>
+    </section> -->
+  </div>
+
+</div> -->
