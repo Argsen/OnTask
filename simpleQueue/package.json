@@ -10,6 +10,7 @@
     "mysql": "^2.13.0",
     "nodemailer": "^3.1.4",
     "require-dir": "^0.3.2",
+    "sequelize": "^4.22.8",
     "unzip": "^0.1.11",
     "xlsx": "^0.11.8"
   },
