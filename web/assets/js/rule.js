@@ -32,9 +32,11 @@ var rule = (function() {
         type: 'string',
         operators: ['equal', 'not_equal', 'less', 'less_or_equal', 'greater', 'greater_or_equal']
       };
-    } 
+    }
     var testArr = [];
-    _checkRuleExpressId(testArr, defaultRules.rules);
+    if (defaultRules) {  
+      _checkRuleExpressId(testArr, defaultRules.rules);
+    }
     var mark = false;
     for (var i=0; i<testArr.length; i++) {
       if (ruleColumns.indexOf(testArr[i]) < 0) {

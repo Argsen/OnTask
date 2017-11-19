@@ -16,5 +16,14 @@
       "pass": ""
     },
     "from": ""
+  },
+
+  "adminDB": {
+    "host": "localhost",
+    "user": "",
+    "password": "",
+    "database": "ontask_admin",
+    "port": 3306,
+    "multipleStatements": true
   }
 }

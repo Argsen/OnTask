@@ -6,8 +6,12 @@ module.exports.constant = {
   upload: {
     csv: 'upload-csv',
     table: 'upload-table',
-    matrix: 'upload-matrix'
+    matrix: 'upload-matrix',
+    outSource: 'upload-outSource'
   },
+  importDataSchedule:'* * * * *',
+  ruleRunSchedule: '* * * * *',
+  cronJobTimeZone: 'Australia/Adelaide',
   authType: 'ldap',                           // choose from ldap, activeDirectory, local;
   ldapSettings: {
     url: "",       // server url
@@ -98,6 +102,15 @@ module.exports.constant = {
 
       return studentDN;
     }                                         // student groups' dn
+  },
+  lti: {
+    url: 'http://127.0.0.1:1337/lti',             // LTI Provider URL
+    key: '',                                      // LTI Consumer key
+    secrect: '',                                  // LTI Consumer secrect
+    admin: 'Admin',                               // Admin role
+    instructor: 'Instructor',                     // Instructor role
+    organisation: '',                             // Organisation from LTI Consumer (during user creation)
+    data: ''                                      // Extra data to save into database (during user creation)
   },
   email: {
     config: {

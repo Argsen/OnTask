@@ -130,7 +130,6 @@ module.exports = {
             workflows.splice(i, 1);
           }
         }
-        console.log(workflows);
         if (workflows.length > 0) {
           return res.ok({
             status: 'success',
@@ -258,8 +257,6 @@ module.exports = {
         let workflow = await User_Workflow.findOne({user: userId, workflow: workflowId}).populate('workflow');
         if (workflow.access == 'admin') {
           let workflows = await User_Workflow.find({workflow: workflowId}).populate('workflow');
-          console.log(workflows);
-          console.log(userId);
           let arr = [];
           for (let i=0; i<workflows.length; i++) {
             if (workflows[i].user !== userId) {
@@ -318,7 +315,7 @@ module.exports = {
                 let result = await User_Workflow.create(obj);
               }
             }
-  
+
             return res.json({
               status: 'success',
               data: 'success'
@@ -355,7 +352,7 @@ module.exports = {
       const workflowId = req.param('workflowId') || 0;
 
       if (sharedUser && workflowId !== 0) {
-        let user = await User.findOne({email: sharedUser.split(', ')[1]}); 
+        let user = await User.findOne({email: sharedUser.split(', ')[1]});
 
         let result = await User_Workflow.destroy({user: user.id, workflow: workflowId});
 

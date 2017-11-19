@@ -2,15 +2,12 @@
  * Created by Harry on 13/12/2016.
  */
 
-const cron = require('node-cron');
 const mysql = require('mysql');
-const CronJob = require('cron').CronJob;
-const cron_job_interval = '* * * * *';
 const archiver = require('archiver');
 const unzip = require('unzip');
 const fs = require('fs');
 
-module.exports = {
+const RuleController = {
   create: function (req, res) {
     let workflowId = req.param('workflowId') || req.session.sWorkflowId || 0;
     let name = req.param('name');
@@ -182,6 +179,148 @@ module.exports = {
     }
   },
 
+  ruleRun: function (req, res) {
+    let userId = req.param('userId') || req.session.sUserId || 0;
+    let workflowId = req.param('workflowId') || req.session.sWorkflowId || 0;
+    let ruleId = req.param('ruleId');
+    let serverInfo = sails.config.constant.serverInfo.config;
+    let customAttributes = req.param('customAttributes');
+    let runType = req.param('runType');
+
+    if (userId && workflowId && ruleId) {
+      Rule.findOne(ruleId).exec(function (err, rule) {
+        if (err) {
+          console.log(err);
+        } else {
+          if (rule) {
+            let conditions = JSON.parse(rule.condition);
+            if (!conditions) {
+              console.log('Please create conditions and save rule first.');
+            }
+              let action = rule.action;
+              let notificationType = JSON.parse(rule.data).notificationType;
+              let superCondition = JSON.parse(rule.data).superCondition;
+              let emailSubject = JSON.parse(rule.data).emailSubject;
+
+              serverInfo.database = sails.config.constant.serverInfo.workflowDB;
+              serverInfo.multipleStatements = true;
+
+              // create a snapshot for workflow table
+              DBService.execute(serverInfo, 'CREATE TABLE if not exists workflow' + workflowId + '_' + Date.now() + ' AS SELECT * FROM workflow' + workflowId, function (err, data) {
+
+              });
+
+              DBService.execute(serverInfo, 'SELECT * FROM ' + mysql.escapeId('workflow' + workflowId), function (err, data) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  for (var i=0; i<data.length; i++) {
+                    if (!data[i].email || (conditions[superCondition] && !eval(expressionConstruct(conditions[superCondition], data[i], '')))) {
+
+                    } else {
+                      var temp = action;
+                      var columns = [];
+                      temp.replace(/{{(.*?)}/g, function (g0, g1) {
+                        columns.push(g1);
+                      });
+
+                      var result = action;
+
+                      for (var j=0; j<columns.length; j++) {
+                        if (columns[j].indexOf(':') < 0) {
+                          if (columns[j].indexOf('-') < 0) {
+                            if (data[i][columns[j]]) {
+                              result = result.replace('{{' + columns[j] + '}}', data[i][columns[j]]);
+                            } else {
+                              result = result.replace('{{' + columns[j] + '}}', '');
+                            }
+                          } else {
+                            if (customAttributes && columns[j].split('-')[1] && customAttributes[columns[j].split('-')[1]]) {
+                              result = result.replace('{{' + columns[j] + '}}', customAttributes[columns[j].split('-')[1]]);
+                            }
+                          }
+                        } else {
+                          var conditionName = columns[j].split(':')[0];
+                          var conditionBoolean = columns[j].split(':')[1];
+
+                          if (conditions[conditionName]) {
+                            var expressionResult = '';
+                            expressionResult = expressionConstruct(conditions[conditionName], data[i], expressionResult);
+                            var part1 = result.split('{{' + columns[j] + '} : {')[0];
+                            var part2 = result.split('{{' + columns[j] + '} : {')[1];
+                            if (part2) {
+                              var removeString = result.substr(part1.length, columns[j].length + 7 + part2.indexOf('}}') + 2);
+                            } else {
+                              var removeString = '';
+                            }
+                            if (eval(expressionResult) == eval(conditionBoolean.toLowerCase())) {
+                              result = result.replace('{{' + columns[j] + '} : {', '');
+                              result = result.replace('}}', '');
+                            } else {
+                              result = result.replace(removeString, '');
+                            }
+                          }
+                        }
+                      }
+
+                      var pattern1 = '<p></p>',
+                        re1 = new RegExp(pattern1, "g");
+                      var pattern2 = '<p>&nbsp;</p>',
+                        re2 = new RegExp(pattern2, "g");
+                      result = result.replace(re1, '');
+                      result = result.replace(re2, '');
+
+                      let notificationObj = {
+                        workflow: workflowId,
+                        rule: ruleId,
+                        email: data[i].email,
+                        type: '',
+                        status: '',
+                        read: 'false',
+                        data: result,
+                        subject: emailSubject
+                      };
+
+                      if (notificationType.notification) {
+                        notificationObj.type = 'notification';
+                        notificationObj.status = (runType == 'test') ? 'test' : 'created';
+                        Notification.create(notificationObj).exec(function (err, notification){
+
+                        });
+                      }
+                      if (notificationType.email) {
+                        notificationObj.type = 'email';
+                        if (runType == 'test') {
+                          notificationObj.status = 'test';
+                          Notification.create(notificationObj).exec(function (err, notification){
+
+                          });
+                        } else {
+                          notificationObj.status = 'created';
+                          sendEmail(userId, notificationObj, data[i].email, result);
+                        }
+                      }
+                    }
+                    if (i == (data.length - 1)) {
+                      let msg = "Rule has finished running. Email sending in process, might take a while, please check this rule's summary";
+                      if (runType == 'test') {
+                        msg = "Rule test run has been processed. Please check this rule's summary.";
+                      }
+                      console.log(msg);
+                    }
+                  }
+                }
+              });
+          } else {
+            console.log('Cannot find rule.');
+          }
+        }
+      });
+    } else {
+      console.log('Not valid user, workflow or rule ID.')
+    }
+  },
+
   run: function (req, res) {
     let userId = req.param('userId') || req.session.sUserId || 0;
     let workflowId = req.param('workflowId') || req.session.sWorkflowId || 0;
@@ -206,120 +345,144 @@ module.exports = {
                 msg: 'Please create conditions and save rule first.'
               });
             }
-            let action = rule.action;
-            let notificationType = JSON.parse(rule.data).notificationType;
-            let superCondition = JSON.parse(rule.data).superCondition;
-            let emailSubject = JSON.parse(rule.data).emailSubject;
+            const schedule = rule.schedule || sails.config.constant.ruleRunSchedule;
+            if (schedule) {
+              let obj = {
+                userId: userId,
+                workflowId: workflowId,
+                ruleId: ruleId,
+                serverInfo: serverInfo,
+                customAttributes: customAttributes,
+                runType: runType,
+                rule: rule
+              }
+              CronJobService.ruleRun(obj);
+              return res.json({
+                status: 'success',
+                data: 'Action Success. The rule will run based on schedule.'
+              });
+            } else {
+              let action = rule.action;
+              let notificationType = JSON.parse(rule.data).notificationType;
+              let superCondition = JSON.parse(rule.data).superCondition;
+              let emailSubject = JSON.parse(rule.data).emailSubject;
 
-            serverInfo.database = 'user' + userId;
-            serverInfo.multipleStatements = true;
-            DBService.execute(serverInfo, 'SELECT * FROM ' + mysql.escapeId('workflow' + workflowId), function (err, data) {
-              if (err) {
-                return res.badRequest({
-                  status: 'error',
-                  msg: err
-                });
-              } else {
-                for (var i=0; i<data.length; i++) {
-                  if (!data[i].email || (conditions[superCondition] && !eval(expressionConstruct(conditions[superCondition], data[i], '')))) {
+              serverInfo.database = sails.config.constant.serverInfo.workflowDB;
+              serverInfo.multipleStatements = true;
 
-                  } else {
-                    var temp = action;
-                    var columns = [];
-                    temp.replace(/{{(.*?)}/g, function (g0, g1) {
-                      columns.push(g1);
-                    });
+              // create a snapshot for workflow table
+              DBService.execute(serverInfo, 'CREATE TABLE if not exists workflow' + workflowId + '_' + Date.now() + ' AS SELECT * FROM workflow' + workflowId, function (err, data) {
 
-                    var result = action;
+              });
 
-                    for (var j=0; j<columns.length; j++) {
-                      if (columns[j].indexOf(':') < 0) {
-                        if (columns[j].indexOf('-') < 0) {
-                          if (data[i][columns[j]]) {
-                            result = result.replace('{{' + columns[j] + '}}', data[i][columns[j]]);
+              DBService.execute(serverInfo, 'SELECT * FROM ' + mysql.escapeId('workflow' + workflowId), function (err, data) {
+                if (err) {
+                  return res.badRequest({
+                    status: 'error',
+                    msg: err
+                  });
+                } else {
+                  for (var i=0; i<data.length; i++) {
+                    if (!data[i].email || (conditions[superCondition] && !eval(expressionConstruct(conditions[superCondition], data[i], '')))) {
+
+                    } else {
+                      var temp = action;
+                      var columns = [];
+                      temp.replace(/{{(.*?)}/g, function (g0, g1) {
+                        columns.push(g1);
+                      });
+
+                      var result = action;
+
+                      for (var j=0; j<columns.length; j++) {
+                        if (columns[j].indexOf(':') < 0) {
+                          if (columns[j].indexOf('-') < 0) {
+                            if (data[i][columns[j]]) {
+                              result = result.replace('{{' + columns[j] + '}}', data[i][columns[j]]);
+                            } else {
+                              result = result.replace('{{' + columns[j] + '}}', '');
+                            }
                           } else {
-                            result = result.replace('{{' + columns[j] + '}}', '');
+                            if (customAttributes && columns[j].split('-')[1] && customAttributes[columns[j].split('-')[1]]) {
+                              result = result.replace('{{' + columns[j] + '}}', customAttributes[columns[j].split('-')[1]]);
+                            }
                           }
                         } else {
-                          if (customAttributes && columns[j].split('-')[1] && customAttributes[columns[j].split('-')[1]]) {
-                            result = result.replace('{{' + columns[j] + '}}', customAttributes[columns[j].split('-')[1]]);
-                          }
-                        }
-                      } else {
-                        var conditionName = columns[j].split(':')[0];
-                        var conditionBoolean = columns[j].split(':')[1];
+                          var conditionName = columns[j].split(':')[0];
+                          var conditionBoolean = columns[j].split(':')[1];
 
-                        if (conditions[conditionName]) {
-                          var expressionResult = '';
-                          expressionResult = expressionConstruct(conditions[conditionName], data[i], expressionResult);
-                          var part1 = result.split('{{' + columns[j] + '} : {')[0];
-                          var part2 = result.split('{{' + columns[j] + '} : {')[1];
-                          if (part2) {
-                            var removeString = result.substr(part1.length, columns[j].length + 7 + part2.indexOf('}}') + 2);
-                          } else {
-                            var removeString = '';
-                          }
-                          if (eval(expressionResult) == eval(conditionBoolean.toLowerCase())) {
-                            result = result.replace('{{' + columns[j] + '} : {', '');
-                            result = result.replace('}}', '');
-                          } else {
-                            result = result.replace(removeString, '');
+                          if (conditions[conditionName]) {
+                            var expressionResult = '';
+                            expressionResult = expressionConstruct(conditions[conditionName], data[i], expressionResult);
+                            var part1 = result.split('{{' + columns[j] + '} : {')[0];
+                            var part2 = result.split('{{' + columns[j] + '} : {')[1];
+                            if (part2) {
+                              var removeString = result.substr(part1.length, columns[j].length + 7 + part2.indexOf('}}') + 2);
+                            } else {
+                              var removeString = '';
+                            }
+                            if (eval(expressionResult) == eval(conditionBoolean.toLowerCase())) {
+                              result = result.replace('{{' + columns[j] + '} : {', '');
+                              result = result.replace('}}', '');
+                            } else {
+                              result = result.replace(removeString, '');
+                            }
                           }
                         }
                       }
-                    }
 
-                    var pattern1 = '<p></p>',
-                      re1 = new RegExp(pattern1, "g");
-                    var pattern2 = '<p>&nbsp;</p>',
-                      re2 = new RegExp(pattern2, "g");
-                    result = result.replace(re1, '');
-                    result = result.replace(re2, '');
+                      var pattern1 = '<p></p>',
+                        re1 = new RegExp(pattern1, "g");
+                      var pattern2 = '<p>&nbsp;</p>',
+                        re2 = new RegExp(pattern2, "g");
+                      result = result.replace(re1, '');
+                      result = result.replace(re2, '');
 
-                    let notificationObj = {
-                      workflow: workflowId,
-                      rule: ruleId,
-                      email: data[i].email,
-                      type: '',
-                      status: '',
-                      read: 'false',
-                      data: result,
-                      subject: emailSubject
-                    };
+                      let notificationObj = {
+                        workflow: workflowId,
+                        rule: ruleId,
+                        email: data[i].email,
+                        type: '',
+                        status: '',
+                        read: 'false',
+                        data: result,
+                        subject: emailSubject
+                      };
 
-                    if (notificationType.notification) {
-                      notificationObj.type = 'notification';
-                      notificationObj.status = (runType == 'test') ? 'test' : 'created';
-                      Notification.create(notificationObj).exec(function (err, notification){
-
-                      });
-                    }
-                    if (notificationType.email) {
-                      notificationObj.type = 'email';
-                      if (runType == 'test') {
-                        notificationObj.status = 'test';
+                      if (notificationType.notification) {
+                        notificationObj.type = 'notification';
+                        notificationObj.status = (runType == 'test') ? 'test' : 'created';
                         Notification.create(notificationObj).exec(function (err, notification){
 
                         });
-                      } else {
-                        notificationObj.status = 'created';
-                        sendEmail(userId, notificationObj, data[i].email, result);
+                      }
+                      if (notificationType.email) {
+                        notificationObj.type = 'email';
+                        if (runType == 'test') {
+                          notificationObj.status = 'test';
+                          Notification.create(notificationObj).exec(function (err, notification){
+
+                          });
+                        } else {
+                          notificationObj.status = 'created';
+                          sendEmail(userId, notificationObj, data[i].email, result);
+                        }
                       }
                     }
-                  }
-                  if (i == (data.length - 1)) {
-                    let msg = "Rule has finished running. Email sending in process, might take a while, please check this rule's summary";
-                    if (runType == 'test') {
-                      msg = "Rule test run has been processed. Please check this rule's summary.";
+                    if (i == (data.length - 1)) {
+                      let msg = "Rule has finished running. Email sending in process, might take a while, please check this rule's summary";
+                      if (runType == 'test') {
+                        msg = "Rule test run has been processed. Please check this rule's summary.";
+                      }
+                      return res.json({
+                        status: 'success',
+                        data: msg
+                      });
                     }
-                    return res.json({
-                      status: 'success',
-                      data: msg
-                    });
                   }
                 }
-              }
-            });
+              });
+            }
           } else {
             return res.badRequest({
               status: 'error',
@@ -482,8 +645,6 @@ module.exports = {
       let uploadFile = req.file('uploadFile');
       let type = req.param('type').toLowerCase();
 
-      console.log(type);
-
       if (type == 'zip') {
         uploadFile.upload(function onUploadComplete (err, file) {
           if (err) {
@@ -504,7 +665,6 @@ module.exports = {
                   if (attr == 'ontask_rule') {
                     let obj = JSON.parse(data[attr].text);
                     obj.workflow = workflowId;
-                    console.log(obj);
                     let rule = await Rule.create(obj);
                   } else {
                     let result;
@@ -560,6 +720,8 @@ module.exports = {
     }
   }
 };
+
+module.exports = RuleController;
 
 function sendEmail(userId, notificationObj, email, result) {
   Notification.create(notificationObj).exec(function (err, notification){

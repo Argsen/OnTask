@@ -149,11 +149,63 @@ module.exports = {
         }
       }
     });
+  },
+  
+  loginLTI: (data, cb) => {
+    const randomPassword = Math.random().toString(36).slice(-10);
+    const userData = {
+      email: data.email,
+      password: randomPassword,
+      source: 'LTI',
+      organisation: sails.config.constant.lti.organisation,
+      data: sails.config.constant.lti.data
+    };
+
+    User.findOrCreate({ email: data.email }, userData).exec((err, user) => {
+      if (err) {
+        return cb(err);
+      }
+
+      if (!user) {
+        return cb('Cannot create user');
+      }
+
+      if (Array.isArray(user) && user.length > 0) {
+        user = user[0];
+      }
+
+      // update user data
+      user.firstName = data.firstName;
+      user.lastName = data.lastName;
+      user.role = data.role;
+      user.save();
+
+      signToken(user.email, user.role, (chunk) => {
+        return cb(null, { user: user, token: JSON.parse(chunk).token });
+      });
+    });
   }
 }
 
 
 function signToken(user, role, cb) {
+  if (typeof role === 'number') {
+    switch (role) {
+      case 1:
+        role = 'admin';
+        break;
+      case 2:
+        role = 'staff';
+        break;
+      case 3:
+        role = 'student';
+        break;
+      default:
+        role = 'student';
+        break;
+    }
+  }
+
   let data = JSON.stringify({
     user: user,
     role: role
@@ -168,10 +220,14 @@ function signToken(user, role, cb) {
     }
   };
 
-  let req = http.request(options, function (res) {
+  let req = http.request(options, (res) => {
     res.setEncoding('utf8');
-    res.on('data', function (chunk) {
-      return cb(chunk);
+    let data = '';
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+    res.on('end', () => {
+      cb(data);
     });
   });
 

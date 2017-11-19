@@ -91,8 +91,7 @@ module.exports = {
             serverInfo = sails.config.constant.serverInfo.config,
             adminDB = sails.config.constant.serverInfo.adminDB,
             workflowDB = sails.config.constant.serverInfo.workflowDB;
-      console.log(userId);
-      console.log(workflowId);
+
       if (userId !== 0 && workflowId !== 0) {
         let workflowTable = 'workflow' + workflowId;
         let workflowEditTable = 'workflow' + workflowId +'_edit';
@@ -188,7 +187,6 @@ module.exports = {
       const workflowDB = sails.config.constant.serverInfo.workflowDB;
 
       let uploadFile = req.file('uploadFile');
-      console.log(req.param('type'));
       let type = req.param('type').toLowerCase();
 
       if (type == 'zip') {

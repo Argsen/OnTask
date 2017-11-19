@@ -36,6 +36,15 @@ queue.process('upload-matrix', function (job, done) {
 		}
 	});
 });
+queue.process('upload-outSource', function (job, done) {
+  data.outSource(job, function (err, data) {
+    if (err) {
+      done(err, null);
+    } else {
+      done(null, data);
+    }
+  });
+});
 
 function email(data, done) {
 	let transporter = nodemailer.createTransport({

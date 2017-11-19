@@ -157,7 +157,7 @@ $(document).ready(function() {
         checkToken(response);
       },
       success: function(response) {
-        
+
         var re = new RegExp($overviewSearch.val(), 'i');
         var $overviewList = $("#overview-list");
         $overviewList.empty();
@@ -192,7 +192,7 @@ $(document).ready(function() {
   //$notificationSubHeadingSetting.hide();
 
   var $headingDropDownWrap = $('#heading-drop-down-wrap ul');
-  $headingDropDownWrap.children().eq(0).hide();
+  $headingDropDownWrap.children().eq(1).hide();
 
   /*---------------------- end change password section -----------------------*/
 });
@@ -211,7 +211,7 @@ var insertWorkflowList = function(element, data) {
     element.append(div_content);
     div_content.find(".name").text(data.workflow.name + ' (Shared)');
   }
-  
+
   div_content.find(".description").text(data.workflow.description);
   bindOpenWorkflow($("#open_" + data.workflow.id), data.workflow.id);
 };
@@ -346,7 +346,7 @@ var bindShareWorkflow = function (element, workflowId) {
             $("#share-inputUser").on('input', function () {
               var val = this.value;
               if($('#share-searchUser').find('option').filter(function(){
-                  return this.value.toUpperCase() === val.toUpperCase();        
+                  return this.value.toUpperCase() === val.toUpperCase();
               }).length) {
                 //send ajax request
                 if (sharedUsers.indexOf(val) < 0) {
@@ -355,7 +355,7 @@ var bindShareWorkflow = function (element, workflowId) {
                 }
               }
             });
-    
+
             $("#share-confirm").click(function () {
               $.ajax({
                 type: "post",

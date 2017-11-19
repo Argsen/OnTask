@@ -30,6 +30,7 @@
     <div class="heading-drop-down">
     <ul>
       <li><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Change Password</li>
+      <li><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Workflow Management</li>
       <li id="logout-button"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
     </ul>
     </div>
@@ -123,6 +124,10 @@
      $("#old-password").focus();
      $notificationSubHeadingSetting.trigger("click");
 
+   });
+
+   $headingDropDown.eq(1).on('click', function () {
+     window.location.href = 'apiManagement';
    });
 
    var $oldPassword = $("#old-password");

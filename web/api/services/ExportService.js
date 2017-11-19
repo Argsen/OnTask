@@ -19,7 +19,6 @@ var exports = {
     }
 
     var csv = json2csv({data: data, fields: fields});
-    console.log(fields);
     return cb(null, {type: 'text/csv', data: csv});
   },
 

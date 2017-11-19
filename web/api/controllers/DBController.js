@@ -374,6 +374,38 @@ module.exports = {
     }
   },
 
+  checkMatrixExist: function (req, res) {
+    const workflowId = req.session.sWorkflowId || 0;
+
+    if (workflowId !== 0) {
+      Workflow.findOne(workflowId).exec(function (err, workflow) {
+        if (err) {
+          return res.badRequest({
+            status: 'error',
+            msg: err
+          });
+        } else {
+          if (workflow.transfer) {
+            return res.json({
+              status: 'success',
+              data: true
+            });
+          } else {
+            return res.json({
+              status: 'success',
+              data: false
+            });
+          }
+        }
+      });
+    } else {
+      return res.badRequest({
+        status: 'error',
+        msg: 'Invalid workflow ID.'
+      });
+    }
+  },
+
   uploadTable: function (req, res) {
     let userId = req.session.sUserId || 0;
     let workflowId = req.session.sWorkflowId || 0;
@@ -382,6 +414,9 @@ module.exports = {
     let data = req.param('data');
     let path = req.param('path');
     let unique = req.param('unique');
+    let selectColumn = req.param('selectColumn');
+    let primaryKey = req.param('primaryKey');
+    let createMatrix = req.param('createMatrix');
     let adminDB = sails.config.constant.serverInfo.adminDB;
     let workflowDB = sails.config.constant.serverInfo.workflowDB;
 
@@ -403,6 +438,7 @@ module.exports = {
               data: 'Table name already exists, please change upload file name and try again.'
             });
           } else {
+            let validColumns = [];
             fs.createReadStream(path)
               .pipe(parse({delimiter: ','}))
               .on('data', function (csvrow) {
@@ -413,25 +449,32 @@ module.exports = {
               })
               .on('end', function () {
                 csvData[0] = data;
-                for (let i=0; i<csvData[0].length; i++) {
-                  csvData[0][i] = mysql.escapeId(csvData[0][i]);
-                }
+                // for (let i=0; i<csvData[0].length; i++) {
+                //   csvData[0][i] = mysql.escapeId(csvData[0][i]);
+                // }
                 let query = 'CREATE TABLE IF NOT EXISTS ' + mysql.escapeId('ontask_workflow' + workflowId + '_' + name) + ' (';
+                let tempArr = [];
                 for (var i=0; i<csvData[0].length; i++) {
                   let a = '';
                   if (unique && unique.indexOf(csvData[0][i]) > -1) {
                     a = 'unique';
                   }
                   csvData[0][i] = csvData[0][i].replace(/\s/g, "_");
-                  if (i == csvData[0].length - 1) {
-                    query += csvData[0][i] + ' text ' + a + ')';
-                  } else {
-                    query += csvData[0][i] + ' text ' + a + ',';
+                  // if (i == csvData[0].length - 1) {
+                  //   query += csvData[0][i] + ' text ' + a + ')';
+                  // } else {
+                  //   query += csvData[0][i] + ' text ' + a + ',';
+                  // }
+                  if (selectColumn[i] == true || selectColumn[i] == 'true') {
+                    tempArr.push(csvData[0][i] + ' text ' + a);
+                    validColumns.push(csvData[0][i]);
                   }
                 }
+                query += tempArr.join(',') + ')';
 
                 query += ' ENGINE=InnoDB ROW_FORMAT=COMPRESSED;';
                 DBService.execute(serverInfo, query, function (err, data) {
+                  console.log(err);
                   if (err) {
                     return res.badRequest({
                       status: 'error',
@@ -440,7 +483,7 @@ module.exports = {
                   } else {
                     let temp = 0;
                     for (var i=0; i<Math.ceil(csvData.length/1000); i++) {
-                      query = 'INSERT INTO ' + mysql.escapeId('ontask_workflow' + workflowId + '_' + name) + ' (' + csvData[0].join(',') + ') VALUES ';
+                      query = 'INSERT INTO ' + mysql.escapeId('ontask_workflow' + workflowId + '_' + name) + ' (' + validColumns.join(',') + ') VALUES ';
 
                       for (var j=(i*1000+1); j<(i*1000 + 1000 + 1); j++) {
                         if (j == csvData.length) {
@@ -453,7 +496,13 @@ module.exports = {
                             }
                             continue;
                           }
-                          query += '(' + csvData[j].join(',') + ')';
+                          let tempArr = [];
+                          for (let k=0; k<csvData[j].length; k++) {
+                            if (selectColumn[k] == true || selectColumn[k] == 'true') {
+                              tempArr.push(csvData[j][k]);
+                            }
+                          }
+                          query += '(' + tempArr.join(',') + ')';
                           if (j==(i*1000 + 1000) || j == (csvData.length - 1)) {
                             query += ';';
                           } else {
@@ -477,8 +526,23 @@ module.exports = {
                                 msg: err
                               });
                             } else {
-                              return res.ok({
-                                status: 'success'
+                              let obj = {
+                                workflowId: workflowId,
+                                mainTable: 'ontask_workflow' + workflowId + '_' + name,
+                                columns: validColumns
+                              }
+
+                              createMatrixFromCSV(obj, function (err, result) {
+                                if (err) {
+                                  return res.badRequest({
+                                    status: 'error',
+                                    msg: err
+                                  });
+                                } else {
+                                  return res.ok({
+                                    status: 'success'
+                                  });
+                                }
                               });
                             }
                           });
@@ -496,8 +560,23 @@ module.exports = {
                                 msg: err
                               });
                             } else {
-                              return res.ok({
-                                status: 'success'
+                              let obj = {
+                                workflowId: workflowId,
+                                mainTable: 'ontask_workflow' + workflowId + '_' + name,
+                                columns: validColumns
+                              }
+
+                              createMatrixFromCSV(obj, function (err, result) {
+                                if (err) {
+                                  return res.badRequest({
+                                    status: 'error',
+                                    msg: err
+                                  });
+                                } else {
+                                  return res.ok({
+                                    status: 'success'
+                                  });
+                                }
                               });
                             }
                           });
@@ -696,7 +775,7 @@ module.exports = {
         msg: 'Invalid user or workflow ID.'
       });
     }
-  }
+  },
 
   // transfer: function (req, res) {
   //   let userId = req.param('userId') || req.session.sUserId || 0;
@@ -810,6 +889,83 @@ module.exports = {
   //     });
   //   }
   // }
+
+  outSourceDB: async (req, res) => {
+    try {
+      const userId = req.param('userId') || 0,
+            workflowId = req.param('workflowId') || req.session.sWorkflowId || 0,
+            host = req.param('host'),
+            user = req.param('user'),
+            password = req.param('password'),
+            database = req.param('database'),
+            dialect = req.param('dialect'),
+            port = req.param('port'),
+            table = req.param('table'),
+            columns = req.param('columns'),
+            schedule = req.param('schedule') || sails.config.constant.importDataSchedule;
+            adminDB = sails.config.constant.serverInfo.adminDB;
+
+      // import db from out source, provide userId or workflowId to determine whether the db is bind to user or workflow.
+      if (userId !== 0 || workflowId !== 0) {
+        let obj = {
+          workflowId: workflowId,
+          host: host,
+          user: user,
+          password: password,
+          database: database,
+          dialect: dialect,
+          port: port,
+          table: table,
+          columns: columns,
+          schedule: schedule
+        }
+
+        if (schedule) {
+          let result = await CronJobService.importOutSourceData(obj);
+          return res.json({
+            status: 'success',
+            data: 'Action Success'
+          });
+        } else {
+          DBService.outSource(obj, function (err, data) {
+            uploadDBS({db_name: adminDB, table_name: 'ontask_workflow' + workflowId + '_' + table}, {db_name: adminDB, table_name: 'ontask_workflow' + workflowId + '_' + table}, workflowId, function (err, result) {
+              if (err) {
+                return res.badRequest({
+                  status: 'error',
+                  msg: err
+                });
+              } else {
+                Dbs.update({db_name: adminDB, table_name: 'ontask_workflow' + workflowId + '_' + table}, {connection_string: JSON.stringify(obj)}).exec(function (err, result) {
+                  if (err) {
+                    return res.badRequest({
+                      status: 'error',
+                      msg: err
+                    });
+                  } else {
+                    return res.json({
+                      status: 'success',
+                      data: result
+                    });
+                  }
+                });
+              }
+            });
+          });
+        }
+      } else {
+        return res.badRequest({
+          status: 'error',
+          msg: 'Need to provide userId or workflowId'
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      return res.badRequest({
+        status: 'error',
+        msg: err
+      });
+    }
+  }
 }
 
 function getStructure(serverInfo, query, obj) {
@@ -913,4 +1069,32 @@ function uploadDBS(findObj, createObj, workflowId, cb) {
       });
     }
   });
+}
+
+// directly create matrix when upload csv file
+async function createMatrixFromCSV(obj, cb) {
+  try {
+    let transferObj = {};
+    transferObj.mainTable = obj.mainTable;
+    transferObj.joinTable = [];
+    transferObj.columns = [];
+    for (let i=0; i<obj.columns.length; i++) {
+      transferObj.columns.push({
+        source: obj.mainTable + '.' + obj.columns[i],
+        target: obj.columns[i]
+      });
+    }
+    transferObj.constraints = [];
+
+    let transferQuery = await DBService.transfer(obj.workflowId, sails.config.constant.serverInfo.adminDB, sails.config.constant.serverInfo.workflowDB, transferObj);
+    let serverInfo = sails.config.constant.serverInfo.config;
+    serverInfo.database = sails.config.constant.serverInfo.adminDB;
+    const transferResult = await DBService.queryExecute(serverInfo, transferQuery);
+    let workflow = await Workflow.update(obj.workflowId, {transfer: JSON.stringify(transferObj)});
+    result = await DBService.uploadDBS({db_name: sails.config.constant.serverInfo.workflowDB, table_name: 'workflow' + obj.workflowId}, {db_name: sails.config.constant.serverInfo.workflowDB, table_name: 'workflow' + obj.workflowId}, obj.workflowId);
+    cb(null, 'success');
+  } catch (err) {
+    console.log(err);
+    cb(err, null);
+  }
 }

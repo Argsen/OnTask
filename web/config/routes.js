@@ -119,6 +119,11 @@ module.exports.routes = {
   '/apiManagement': {
     controller: 'pages',
     action: 'apiManagement'
+  },
+
+  'post /lti': {
+    controller: 'lti',
+    action: 'login'
   }
 
 };

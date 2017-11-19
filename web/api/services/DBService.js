@@ -3,6 +3,7 @@
  */
 
 var mysql = require('mysql');
+const queue = sails.config.globals.queue;
 
 module.exports = {
   connection: function (connectionInfo, tableName, cb) {
@@ -153,7 +154,6 @@ module.exports = {
   uploadDBS: function(findObj, createObj, workflowId) {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log(1111);
         Dbs.findOrCreate(findObj, createObj).exec(function (err, record) {
           if (err) {
             reject(err)
@@ -254,6 +254,42 @@ module.exports = {
       } catch (err) {
         reject(err);
       }
+    });
+  },
+
+  outSource: function (obj, cb) {
+    let job = queue.create(sails.config.constant.upload.outSource, obj).save(function (err) {
+      if (err) console.log(job.id + ' error');
+    });
+
+    job.on('complete', function (result) {
+      return cb(null, result);
+    }).on('failed attempt', function(errorMessage, doneAttempts){
+      console.log(errorMessage);
+      console.log('Job failed');
+    }).on('failed', function(errorMessage){
+      console.log(errorMessage);
+      console.log('Job failed');
+    }).on('progress', function(progress, data){
+      console.log('\r  job #' + job.id + ' ' + progress + '% complete with data ', data );
+    });
+  },
+
+  ruleRun: function (obj, cb) {
+    let job = queue.create(sails.config.constant.upuload.ruleRun, obj).save(function (err) {
+      if (err) console.log(job.id + ' error');
+    });
+
+    job.on('complete', function (result) {
+      return cb(null, result);
+    }).on('failed attempt', function(errorMessage, doneAttempts){
+      console.log(errorMessage);
+      console.log('Job failed');
+    }).on('failed', function(errorMessage){
+      console.log(errorMessage);
+      console.log('Job failed');
+    }).on('progress', function(progress, data){
+      console.log('\r  job #' + job.id + ' ' + progress + '% complete with data ', data );
     });
   }
 };

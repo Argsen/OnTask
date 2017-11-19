@@ -792,6 +792,8 @@ var tab2CreateColumn = function(id, data){
   /*-------------- CSV Upload && create csv table into user database -----------*/
 var tempData = new Object(); // temp store csv files data
 
+var uploadCSVPrimaryKey;
+
 $("#uploadSubmit").click(function(e) {
   e.preventDefault();
 
@@ -802,7 +804,7 @@ $("#uploadSubmit").click(function(e) {
       var $fileUploadPreview = $("#file-upload-preview");
       $fileUploadPreview.empty();
 
-      var head = $("<div class='data-table-wrap'><table class='data-table'><thead><tr><th>Unique</th><th>Column Name</th><th>Rename</th></tr></thead><tbody id='csv-table'></tbody></table></div>");
+      var head = $("<div class='data-table-wrap'><table class='data-table'><thead><tr><th>Column to Upload</th><th>Primary Key</th><th>Column Name</th><th>Rename</th></tr></thead><tbody id='csv-table'></tbody></table></div>");
       $fileUploadPreview.append(head);
 
       var $table = $("#csv-table");
@@ -812,11 +814,29 @@ $("#uploadSubmit").click(function(e) {
         insertCSVAttribute(response.data[i], i);
       }
 
-      setTimeout(function(){
-        $(":checkbox").on("click", function(){
-          window.scrollTo(0, 0);
-        })
-      }, 2000)
+      $("#csv-table").append('<tr><td><input type="checkbox" name="csvupload" value="" class="checkbox" id="selectColumnAll" /><label class="checkbox" for="selectColumnAll">Select All</label></td><td></td><td></td><td></td></tr>')
+
+      // setTimeout(function(){
+      //   $(":checkbox").on("click", function(){
+      //     window.scrollTo(0, 0);
+      //   })
+      // }, 2000)
+
+      $(".checkbox1").click(function () {
+        $('.checkbox1').prop('checked', false);
+        $(this).prop('checked', true);
+      });
+
+      $(".checkbox2").prop('checked', true);
+      $("#selectColumnAll").prop('checked', true);
+
+      $("#selectColumnAll").click(function () {
+        if ($(this).prop('checked')) {
+          $(".checkbox2").prop('checked', true);
+        } else {
+          $(".checkbox2").prop('checked', false);
+        }
+      })
 
       tempData = response;
     }
@@ -824,10 +844,9 @@ $("#uploadSubmit").click(function(e) {
 });
 
 var insertCSVAttribute = function(data, index) {
-
   var $table = $("#csv-table");
 
-  var td = $("<tr><td><div class='field'><input type='checkbox' name='csvupload' value='' id='checkbox1_" + data + "' /><label class='checkbox' for='checkbox1_" + data + "'></label></div></td><td>" + data + "</td><td><input type='text' class='btn input-text' value='" + data + "' id='input_" + index + "' /></td></tr>");
+  var td = $("<tr><td><div class='field'><input type='checkbox' name='csvupload' value='' class='checkbox2' id='checkbox2_" + index + "' /><label class='checkbox' for='checkbox2_" + index + "'></label></div></td><td><div class='field'><input type='checkbox' name='csvupload' value='' class='checkbox1' id='checkbox1_" + index + "' /><label class='checkbox' for='checkbox1_" + index + "'></label></div></td><td>" + data + "</td><td><input type='text' class='btn input-text' value='" + data + "' id='input_" + index + "' /></td></tr>");
 
   $table.append(td);
 
@@ -835,57 +854,97 @@ var insertCSVAttribute = function(data, index) {
 
 var $uploadCSV = $("#uploadCSV");
 $uploadCSV.on("click", function() {
+  var selectColumn = [];
+  var primaryKey;
   for (var i = 0; i < tempData.data.length; i++) {
     var $inputValue = $("#input_" + i);
     tempData.data[i] = $inputValue.val();
+    if ($("#checkbox2_" + i).prop('checked')) {
+      selectColumn[i] = true;
+    } else {
+      selectColumn[i] = false;
+    }
+    if ($("#checkbox1_" + i).prop('checked')) {
+      primaryKey = $inputValue.val();
+    }
   }
 
   $.ajax({
-    type: 'POST',
-    url: 'db/uploadTable',
+    type: 'post',
+    url: 'db/checkMatrixExist',
     dataType: 'json',
-    data: {
-      name: $('#uploadFile')[0].files[0].name.replace('.', '_'),
-      data: tempData.data,
-      path: tempData.path,
-    // todo: add unique columns as an array to uploadTable function
-    //  unique: []
-    },
-    error:function(response){
-      checkToken(response);
-      console.log(JSON.parse(response.responseText).msg);
-    },
-    success: function(response) {
-      if (response.status == 'error') {
-        alert(response.data);
+    data: {},
+    error: function (response) {},
+    success: function (response) {
+      if (response.data) {
+        createTable();
       } else {
-        //list.init('db/connection', ['admindb'], function (response) {
-        list.getStructure('', function (response) {
-
-          var $fileUploadOverviewLeftBlock = $("#fileUpload-overview-left-block");
-          $fileUploadOverviewLeftBlock.empty();
-
-          createList("fileUpload-overview-left-block",function(){}, tab2CreateTab, tab2CreateColumn, function(message){
-            if(message === "finish"){
-              bindToggleEvent();
-            }else{
-
-            }
-          });
-
-          //TODO: show success modal
-          var $successModal = $("#successModal");
-          var $confirmUpload = $("#confirm-upload");
-          $successModal.modal();
-          $confirmUpload.on("click", function(){
-            $.modal.close();
-          });
-        });
-
-        window.location.href = "/data";
+        if (confirm('Matrix not exists, do you want directly generate matrix based on this table?')) {
+        //  for (var i=0; i<)
+          if (primaryKey) {
+            createTable(true);
+          } else {
+            alert("Please choose primary key");
+          }
+        } else {
+          createTable();
+        }
       }
     }
   });
+
+  function createTable(createMatrix) {
+    console.log(primaryKey);
+    $.ajax({
+      type: 'POST',
+      url: 'db/uploadTable',
+      dataType: 'json',
+      data: {
+        name: $('#uploadFile')[0].files[0].name.replace('.', '_'),
+        data: tempData.data,
+        path: tempData.path,
+        selectColumn: selectColumn,
+        createMatrix: createMatrix,
+        primaryKey: primaryKey
+      // todo: add unique columns as an array to uploadTable function
+      //  unique: []
+      },
+      error:function(response){
+        checkToken(response);
+        console.log(JSON.parse(response.responseText).msg);
+      },
+      success: function(response) {
+        if (response.status == 'error') {
+          alert(response.data);
+        } else {
+          //list.init('db/connection', ['admindb'], function (response) {
+          list.getStructure('', function (response) {
+
+            var $fileUploadOverviewLeftBlock = $("#fileUpload-overview-left-block");
+            $fileUploadOverviewLeftBlock.empty();
+
+            createList("fileUpload-overview-left-block",function(){}, tab2CreateTab, tab2CreateColumn, function(message){
+              if(message === "finish"){
+                bindToggleEvent();
+              }else{
+
+              }
+            });
+
+            //TODO: show success modal
+            var $successModal = $("#successModal");
+            var $confirmUpload = $("#confirm-upload");
+            $successModal.modal();
+            $confirmUpload.on("click", function(){
+              $.modal.close();
+            });
+          });
+
+          window.location.href = "/data";
+        }
+      }
+    });
+  }
 
 //  $('#uploadFile').val('');
 });
@@ -2225,68 +2284,23 @@ var bindToggleEvent = function() {
 
 $("#dbSubmit").click(function(e) {
   e.preventDefault();
-
-  var connection = {
-    host: $("#dbHost").val().toLowerCase(),
-    user: $("#dbUser").val().toLowerCase(),
-    password: $("#dbPassword").val().toLowerCase(),
-    database: $("#dbDatabase").val().toLowerCase()
-  }
-
   $.ajax({
-    type: 'POST',
-    url: 'db/create',
-    dataType: 'json',
-    data: {
-      'connection': connection
-    },
-    error:function(response){
-      checkToken(response);
-    },
-    success: function(response) {
-      $("#dbHost").val('');
-      $("#dbUser").val('');
-      $("#dbPassword").val('');
-      $("#dbDatabase").val('');
-      $.ajax({
-       type: 'POST',
-       url: 'db/get',
-       dataType: 'json',
-       data: {},
-       error:function(response){
-         checkToken(response);
-       },
-       success: function(response) {
-        //  multipDataString = response;
-         //
-        //  var $dataOverviewLeftBlock = $("#data-overview-left-block");
-        //  $dataOverviewLeftBlock.empty();
-         //
-         for (var i = 0; i < response.data.length; i++) {
-        //   insertDataInfo(JSON.parse(response.data[counter].connection_string).database, i);
-
-           $.ajax({
-            type: 'POST',
-            url: 'db/connection',
-            dataType: 'json',
-            data: {dbInfo: JSON.parse(response.data[i].connection_string)},
-            error:function(response){
-              checkToken(response);
-            },
-            success: function(response) {
-             console.log(response);
-            }
-           });
-
-         }
-       }
-      });
-
-      // var $dataOverviewLeftBlock = $("#data-overview-left-block");
-      // $dataOverviewLeftBlock.empty();
-      // insertDataInfo('admindb', 1);
-      // insertDataInfo('', 2);
-    }
+  	type: "post",
+  	url: "db/outSourceDB",
+  	dataType: "json",
+  	data: {
+  		host: $("#dbHost").val().toLowerCase(),
+  		user: $("#dbUser").val().toLowerCase(),
+  		password: $("#dbPassword").val().toLowerCase(),
+  		database: $("#dbDatabase").val().toLowerCase(),
+  		dialect: $("#dbDialect").val().toLowerCase(),
+  		port: $("#dbPort").val().toLowerCase(),
+  		table: $("#dbTable").val().toLowerCase(),
+  		columns: [],
+      schedule: $("#dbSchedule").val().toLowerCase()
+  	},
+  	error: function (response) {console.log(response)},
+  	success: function (response) {console.log(response); alert("Action Success.")}
   });
 });
 

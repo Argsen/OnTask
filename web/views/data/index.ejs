@@ -15,7 +15,7 @@
             <ul class="horizontal">
               <li id="tab1"><a href="#tab-1">Overview</a></li>
               <li id="tab2"><a href="#tab-2">CSV File Upload</a></li>
-              <li id="tab3" style="display:none"><a href="#tab-3">Plugin: Database</a></li>
+              <li id="tab3"><a href="#tab-3">Plugin: Database</a></li>
               <li id="tab4"><a href="#tab-4" style="display:none;">Plugin: Moodle Data</a></li>
               <li id="tab5" style="display:none;"><a href="#tab-5">Plugin: SIS Data</a></li>
               <li id="tab6"><a href="#tab-6">Data Association</a></li>
@@ -159,6 +159,26 @@
                           </div>
                           <div class="1/2 grid__cell">
                             <div class="form-group"><label class="control-label form-label">Database Name <span class="highlight">*</span></label><input type="text" name="database" id="dbDatabase" class="form-control form-input">
+                              <!--label.control-label.form-label.warning-label(for="")-->
+                            </div>
+                          </div>
+                          <div class="1/2 grid__cell">
+                            <div class="form-group"><label class="control-label form-label">Dialect<span class="highlight">*</span></label><select id="dbDialect"><option>mysql</option><option>sqlite</option><option>postgres</option><option>mssql</option></select>
+                              <!--label.control-label.form-label.warning-label(for="")-->
+                            </div>
+                          </div>
+                          <div class="1/2 grid__cell">
+                            <div class="form-group"><label class="control-label form-label">Port<span class="highlight">*</span></label><input type="text" name="port" id="dbPort" class="form-control form-input">
+                              <!--label.control-label.form-label.warning-label(for="")-->
+                            </div>
+                          </div>
+                          <div class="1/2 grid__cell">
+                            <div class="form-group"><label class="control-label form-label">Target Table<span class="highlight">*</span></label><input type="text" name="table" id="dbTable" class="form-control form-input">
+                              <!--label.control-label.form-label.warning-label(for="")-->
+                            </div>
+                          </div>
+                          <div class="1/2 grid__cell">
+                            <div class="form-group"><label class="control-label form-label">schedule<span class="highlight">*</span></label><input type="text" name="schedule" id="dbSchedule" class="form-control form-input">
                               <!--label.control-label.form-label.warning-label(for="")-->
                             </div>
                           </div>
