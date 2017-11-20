@@ -328,6 +328,32 @@ module.exports = {
        msg: 'Invalid user.'
      });
     }
+  },
+
+  getOntaskInfo: function(req, res) {
+    const userId = req.session.sUserId;
+
+    User.findOne(userId).exec(function (err, user) {
+      if (err) {
+        return res.badRequest({
+          status: 'error',
+          msg: err
+        });
+      }
+
+      if (user) {
+        delete user.password;
+        return res.json({
+          status: 'success',
+          data: user
+        });
+      } else {
+        return res.json({
+          status: 'error',
+          msg: 'Users not found.'
+        });
+      }
+    });
   }
 };
 
