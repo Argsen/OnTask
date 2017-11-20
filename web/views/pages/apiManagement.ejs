@@ -9,18 +9,20 @@
     <div class="grid__cell main-window">
         <div class="grid">
             <div class="1/2 grid__cell">
-                <div id="keyList">
+                <div id="keyList" style="max-height: 600px; overflow: auto;">
 
                 </div>
             </div>
             <div class="1/2 grid__cell">
-                <div id="workflowList">
+                <div id="workflowList" style="max-height: 600px; overflow: auto;">
 
                 </div>
             </div>
 
-            <button id="generateKey">Generate New Key</button>
-            <button id="saveAccess">Confirm Change</button>
+            <button id="generateKey" class="btn btn-green">Generate New Key</button>
+            <button id="saveAccess" class="btn btn-green" style="margin-left:20px;">Confirm Change</button>
+            <button id="disableKey" class="btn btn-green" style="margin-left:20px;">Disable Key</button>
+            <button id="deleteKey" class="btn btn-green" style="margin-left:20px;">Delete Key</button>
         </div>
     </div>
 </section>

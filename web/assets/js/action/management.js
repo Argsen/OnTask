@@ -237,26 +237,43 @@ var bindRuleListEvent = function(data){
   });
 
   $("#" + data[4]).on('click', function () {
-    var type = '';
-    if (confirm('Export include matrix and data source?')) {
-      type = 'include';
-    } else {
-      type = 'exclude';
-    }
-    console.log(type);
-    console.log(data[0]);
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-          var blob = new Blob([this.response], {type: 'application/zip'});
-          var fileName = "ontask_rule.zip";
-          saveAs(blob, fileName);
-      }
-    }
-    var params = 'type=' + type + '&ruleId=' + data[0];
-    xmlHttp.open('POST', 'rule/export', true);
-    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlHttp.responseType = 'arraybuffer';
-    xmlHttp.send(params);
+    $("#export-modal").modal();
+    ruleData = data[0];
   });
 }
+
+var ruleData;
+
+$("#ruleExportIncludeData").click(function () {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        var blob = new Blob([this.response], {type: 'application/zip'});
+        var fileName = "ontask_rule.zip";
+        saveAs(blob, fileName);
+    }
+  }
+  var params = 'type=include&ruleId=' + ruleData;
+  xmlHttp.open('POST', 'rule/export', true);
+  xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlHttp.responseType = 'arraybuffer';
+  xmlHttp.send(params);
+});
+
+$("#ruleExportExcludeData").click(function () {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        var blob = new Blob([this.response], {type: 'application/zip'});
+        var fileName = "ontask_rule.zip";
+        saveAs(blob, fileName);
+    }
+  }
+  var params = 'type=exclude&ruleId=' + ruleData;
+  xmlHttp.open('POST', 'rule/export', true);
+  xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlHttp.responseType = 'arraybuffer';
+  xmlHttp.send(params);
+});
+
+

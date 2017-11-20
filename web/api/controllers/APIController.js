@@ -11,11 +11,13 @@ module.exports = {
 
         let workflows = [];
         for (let i=0; i<access.length; i++) {
-          workflows.push({
-            id: access[i].workflow.id,
-            name: access[i].workflow.name,
-            description: access[i].workflow.description
-          });
+          if (access[i].workflow) {
+            workflows.push({
+              id: access[i].workflow.id,
+              name: access[i].workflow.name,
+              description: access[i].workflow.description
+            });
+          }
         }
         return res.json({
           status: 'success',
@@ -28,6 +30,7 @@ module.exports = {
         });
       }
     } catch (err) {
+      console.log(err);
       res.status(500).send({error: err.code});
     }
   },

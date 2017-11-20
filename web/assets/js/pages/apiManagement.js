@@ -144,13 +144,45 @@ function showKey(div, key) {
 
 // import matrix zip package
 
+$("#uploadFile").change(function() {
+  var $uploadFileSpan = $("#uploadFileSpan");
+  if ($("#uploadFile").val() === '') {
+    console.log("upload file name is null");
+  } else {
+    $uploadFileSpan.empty();
+
+    var nameArray = $("#uploadFile").val().split(/\\/);
+    var position = nameArray.length;
+
+    $uploadFileSpan.text(nameArray[position - 1]);
+  }
+});
+
+$("#uploadFile_Rule").change(function() {
+    var $uploadFileSpan = $("#uploadFileSpan_Rule");
+    if ($("#uploadFile_Rule").val() === '') {
+    console.log("upload file name is null");
+    } else {
+    $uploadFileSpan.empty();
+
+    var nameArray = $("#uploadFile_Rule").val().split(/\\/);
+    var position = nameArray.length;
+
+    $uploadFileSpan.text(nameArray[position - 1]);
+    }
+});
+
 $("#uploadSubmit").click(function (e) {
     e.preventDefault();
 
     var type = $("#uploadFile").val().split('.')[$("#uploadFile").val().split('.').length - 1];
 
     uploadFile.upload($('#uploadForm'), 'matrix/import', type, function(response) {
-        console.log(response);
+        if (response.status == 'success') {
+            alert('Import success.')
+        } else {
+            alert('Import Error. Please try later.');
+        }
     });
 });
 
@@ -158,8 +190,11 @@ $("#uploadSubmit_Rule").click(function (e) {
     e.preventDefault();
 
     var type = $("#uploadFile_Rule").val().split('.')[$("#uploadFile_Rule").val().split('.').length - 1];
-
     uploadFile.upload($('#uploadForm_Rule'), 'rule/import', type, function(response) {
-        console.log(response);
+        if (response.status == 'success') {
+            alert('Import success.')
+        } else {
+            alert('Import Error. Please try later.');
+        }
     });
 });

@@ -44,6 +44,9 @@ const file = {
               fs.mkdirSync('output/' + directoryPath);
             }
           }
+          if (!fs.existsSync('output')){
+            fs.mkdirSync('output');
+          }
           let test1 = await entry.pipe(fs.createWriteStream('output/' + fileName));
           fileArr.push('output/' + fileName);
         } else {

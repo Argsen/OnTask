@@ -72,7 +72,7 @@ module.exports = {
     connection.end();
   },
 
-  queryExecute: function (connectionInfo, query) {
+  queryExecute: function (connectionInfo, query, params) {
     return new Promise((resolve, reject) => {
       connectionInfo.multipleStatements = true;
       let connection = mysql.createConnection(connectionInfo);
@@ -83,13 +83,23 @@ module.exports = {
         }
       });
 
-      connection.query(query, function(err, columns) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(columns);
-        }
-      });
+      if (params) {
+        connection.query(query, params, function(err, columns) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(columns);
+          }
+        });
+      } else {
+        connection.query(query, function(err, columns) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(columns);
+          }
+        });
+      }
 
       connection.end();
     });

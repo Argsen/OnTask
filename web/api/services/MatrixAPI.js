@@ -120,7 +120,6 @@ module.exports = {
 
         let dataQuery = '';
         let tempArr = [];
-        
         for (let i=0; i<columns.length; i++) {
           let query = 'select null from information_schema.columns where column_name = "' + columns[i] + '" and table_name = "' + workflowEditTable + '" and table_schema = "' + workflowDB + '"';
           // check if column exists
@@ -137,6 +136,7 @@ module.exports = {
 
         for (let i=0; i<Math.ceil(datas.length/1000); i++) {
           dataQuery = '';
+          let tempArr2 = [];
           for (let j=(i*1000); j<(i*1000 + 1000); j++) {
             if (j == datas.length) {
               break;
@@ -146,14 +146,16 @@ module.exports = {
             let tempArr1 = [];
             for (let k=0; k<columns.length; k++) {
               if (columns[k] !== key) {
-                tempArr1.push(columns[k] + '=' + datas[j][columns[k]]);
+                tempArr1.push(columns[k] + '=?');
+                tempArr2.push(datas[j][columns[k]]);
               }
             }
             dataQuery += tempArr1.join(',');
-            dataQuery += ' where ' + key + '=' + datas[j][key] + ';'
+            dataQuery += ' where ' + key + '=?;'
+            tempArr2.push(datas[j][key]);
           }
           serverInfo.database = workflowDB;
-          const updateResult = await DBService.queryExecute(serverInfo, dataQuery);
+          const updateResult = await DBService.queryExecute(serverInfo, dataQuery, tempArr2);
         }
 
         const workflow = await Workflow.findOne(workflowId);
@@ -193,16 +195,19 @@ module.exports = {
             
             dataQuery += 'update ' + workflowDB + '.' + workflowEditTable + ' set ';
             let tempArr1 = [];
+            let tempArr2 = [];
             for (let k=0; k<columns.length; k++) {
               if (columns[k] !== key) {
-                tempArr1.push(columns[k] + '=' + datas[j][columns[k]]);
+                tempArr1.push(columns[k] + '=?');
+                tempArr2.push(datas[j][columns[k]]);
               }
             }
             dataQuery += tempArr1.join(',');
-            dataQuery += ' where ' + key + '=' + datas[j][key] + ';'
+            dataQuery += ' where ' + key + '=?;'
+            tempArr2.push(datas[j][key]);
           }
           serverInfo.database = workflowDB;
-          const updateResult = await DBService.queryExecute(serverInfo, dataQuery);
+          const updateResult = await DBService.queryExecute(serverInfo, dataQuery, tempArr2);
         }
 
         resolve('success');
