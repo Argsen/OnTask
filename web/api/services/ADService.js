@@ -155,12 +155,12 @@ module.exports = {
       timeout: 2000,
       connectTimeout: 2000
     });
-    client.on('error', function (err) {
-      return cb(err, null);
-    });
-    // client.on('connectError', function (err) {
+    // client.on('error', function (err) {
     //   return cb(err, null);
     // });
+    client.on('connectError', function (err) {
+      return cb(err, null);
+    });
     client.on('timeout', function (err) {
       return cb(err, null);
     });
