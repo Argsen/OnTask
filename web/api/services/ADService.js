@@ -158,9 +158,9 @@ module.exports = {
     client.on('error', function (err) {
       return cb(err, null);
     });
-    client.on('connectError', function (err) {
-      return cb(err, null);
-    });
+    // client.on('connectError', function (err) {
+    //   return cb(err, null);
+    // });
     client.on('timeout', function (err) {
       return cb(err, null);
     });
