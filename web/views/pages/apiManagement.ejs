@@ -1,11 +1,10 @@
 <% include ../partials/header %>
 
-
 <% include ../partials/loading %>
 
 <% include ../partials/headerPlaceholder %>
 
-<section class="action main-section">
+<section class="action">
     <div class="grid__cell main-window">
         <div class="grid">
             <div class="1/2 grid__cell">
@@ -19,10 +18,13 @@
                 </div>
             </div>
 
-            <button id="generateKey" class="btn btn-green">Generate New Key</button>
-            <button id="saveAccess" class="btn btn-green" style="margin-left:20px;">Confirm Change</button>
-            <button id="disableKey" class="btn btn-green" style="margin-left:20px;">Disable Key</button>
-            <button id="deleteKey" class="btn btn-green" style="margin-left:20px;">Delete Key</button>
+            <div class="grid__cell api-grid-button-block">
+              <button id="generateKey" class="btn btn-green">Generate New Key</button>
+              <button id="saveAccess" class="btn btn-green" style="margin-left:20px;">Confirm Change</button>
+              <button id="disableKey" class="btn btn-green" style="margin-left:20px;">Disable Key</button>
+              <button id="deleteKey" class="btn btn-green" style="margin-left:20px;">Delete Key</button>
+            </div>
+
         </div>
     </div>
 </section>

@@ -35,6 +35,7 @@ body {
   color: #737373;
   background-color: #ffffff;
   margin: 0;
+  height: auto;
 }
 
 label {
@@ -160,3 +161,32 @@ select {
   border-radius: 0;
   margin: 0 10px;
 }
+
+/*------ add api page style ------*/
+.api-grid-button-block{
+  text-align: center;
+  margin-top: 20px !important;
+}
+
+/*------scroll seperately style ------*/
+.column {
+  height: 100vh;
+  width: 50%;
+  float: left;
+  overflow: scroll;
+}
+
+/* Create artificial contecnt that extend past the viewport */
+.content {
+  width: 93%; 
+  background: rgba(255, 255, 255, 0.7);
+  height: 10000px;
+  margin: 20px auto;
+  line-height: 1.5em;
+  padding: 10px;
+}
+
+
+/* Because we like pretty things */
+.blue { background: #dcf5f1; }
+.green { background: #efe; }

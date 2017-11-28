@@ -2,6 +2,25 @@
  * Created by Harry on 21/02/2017.
  */
 
+var showTestNotification = window.localStorage.getItem('showTestNotification');
+if (showTestNotification && showTestNotification == "true") {
+  $("#checkbox2_0").prop('checked', true);
+  window.localStorage.setItem('showTestNotification', showTestNotification);
+} else {
+  showTestNotification = "false";
+  $("#checkbox2_0").prop('checked', false);
+  window.localStorage.setItem('showTestNotification', showTestNotification);
+}
+$("#checkbox2_0").click(function () {
+  if ($(this).prop('checked')) {
+    showTestNotification = "true";
+  } else {
+    showTestNotification = "false";
+  }
+  window.localStorage.setItem('showTestNotification', showTestNotification);
+  window.location.reload();
+});
+
  $(document).ready(function(){
    /*----------------nav bar-----------------------*/
 
@@ -58,7 +77,7 @@
          type: "POST",
          url: "notification/dataTableGet",
          dataType: "json",
-         data: {dataTableData: JSON.stringify(data), ruleId: window.localStorage.getItem('current_rule_id')},
+         data: {dataTableData: JSON.stringify(data), ruleId: window.localStorage.getItem('current_rule_id'), showTestNotification: showTestNotification},
          error: function (response) {
            checkToken(response);
            console.log(JSON.parse(response.responseText).msg);

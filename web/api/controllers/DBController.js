@@ -531,19 +531,24 @@ module.exports = {
                                 mainTable: 'ontask_workflow' + workflowId + '_' + name,
                                 columns: validColumns
                               }
-
-                              createMatrixFromCSV(obj, function (err, result) {
-                                if (err) {
-                                  return res.badRequest({
-                                    status: 'error',
-                                    msg: err
-                                  });
-                                } else {
-                                  return res.ok({
-                                    status: 'success'
-                                  });
-                                }
-                              });
+                              if (createMatrix) {
+                                createMatrixFromCSV(obj, function (err, result) {
+                                  if (err) {
+                                    return res.badRequest({
+                                      status: 'error',
+                                      msg: err
+                                    });
+                                  } else {
+                                    return res.ok({
+                                      status: 'success'
+                                    });
+                                  }
+                                });
+                              } else {
+                                return res.ok({
+                                  status: 'success'
+                                });
+                              }
                             }
                           });
                         }
@@ -565,19 +570,24 @@ module.exports = {
                                 mainTable: 'ontask_workflow' + workflowId + '_' + name,
                                 columns: validColumns
                               }
-
-                              createMatrixFromCSV(obj, function (err, result) {
-                                if (err) {
-                                  return res.badRequest({
-                                    status: 'error',
-                                    msg: err
-                                  });
-                                } else {
-                                  return res.ok({
-                                    status: 'success'
-                                  });
-                                }
-                              });
+                              if (createMatrix) {
+                                createMatrixFromCSV(obj, function (err, result) {
+                                  if (err) {
+                                    return res.badRequest({
+                                      status: 'error',
+                                      msg: err
+                                    });
+                                  } else {
+                                    return res.ok({
+                                      status: 'success'
+                                    });
+                                  }
+                                });
+                              } else {
+                                return res.ok({
+                                  status: 'success'
+                                });
+                              }
                             }
                           });
                         }

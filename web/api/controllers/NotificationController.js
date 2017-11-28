@@ -81,10 +81,19 @@ module.exports = {
     let ruleId = req.param('ruleId');
     let email = req.param('email');
     let dataTableData = JSON.parse(req.param('dataTableData'));
+    let showTestNotification = req.param('showTestNotification');
 
     if (workflowId) {
-      let query = 'select * from notification where workflow=' + mysql.escape(workflowId);
-      let countQuery = 'select count(*) from notification where workflow=' + mysql.escape(workflowId);
+      let query;
+      let countQuery
+      if (showTestNotification == "false") {
+        query = 'select * from notification where status != "test" and workflow=' + mysql.escape(workflowId);
+        countQuery = 'select count(*) from notification where status != "test" and workflow=' + mysql.escape(workflowId);
+      } else {
+        query = 'select * from notification where workflow=' + mysql.escape(workflowId);
+        countQuery = 'select count(*) from notification where workflow=' + mysql.escape(workflowId);
+      }
+
       if (ruleId) {
         query += ' and rule=' + mysql.escape(ruleId);
         countQuery += ' and rule=' + mysql.escape(ruleId);

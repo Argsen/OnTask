@@ -346,7 +346,7 @@ const RuleController = {
               });
             }
             const schedule = rule.schedule || sails.config.constant.ruleRunSchedule;
-            if (schedule) {
+            if (schedule && runType !== 'test') {
               let obj = {
                 userId: userId,
                 workflowId: workflowId,

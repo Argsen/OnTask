@@ -7,161 +7,172 @@
 <% include ../partials/headerPlaceholder %>
 
 <section class="action main-section">
-  <div class="grid">
-    <div class="1/2 grid__cell action-left-section">
-      <article class="action-editor-wrap">
-          <div class="super-condition">
-            <button id="addSuperCondition" class="article-btn"><i class="fa fa-plus-circle" aria-hidden="true"></i><h5>Add Student Filter</h5></button>
-          </div>
-          <div class="action-editor-list">
-            <ol id="conditions"></ol>
 
-            <!-- insert jquery 1.x in order to load query builder, will trigger $.noConflict() in the rule.js to restore 2.x version -->
-            <link href="/styles/queryBuilder/bootstrap.min.css" rel="stylesheet">
-            <link href="/styles/queryBuilder/bootstrap-select.min.css" rel="stylesheet">
-            <link href="/styles/queryBuilder/query-builder.default.css" rel="stylesheet">
-
-            <link rel="stylesheet" type="text/css" href="/bower_components/clockpicker/dist/bootstrap-clockpicker.min.css">
-
-            <script src="/js/queryBuilder/jquery.min.js"></script>
-            <script src="/js/queryBuilder/jQuery.extendext.min.js"></script>
-            <script src="/js/queryBuilder/bootstrap.min.js"></script>
-            <script src="/js/queryBuilder/doT.js"></script>
-            <script src="/js/queryBuilder/query-builder.js"></script>
-            <script src="/js/rule.js"></script>
-            <!-- end of inserting query builder dependencies -->
-
-            <button id="addCondition" class="article-btn"><i class="fa fa-plus-circle" aria-hidden="true"></i><h5>New condition</h5></button>
-            <button id="confirmCondition" style="display: none;" class="article-btn"><i class="fa fa-check-circle" aria-hidden="true"></i><h5>Verify condition</h5></button>
-          </div>
-        </article>
+  <div class="column green">
+    <div class="content">
+        <div class="grid">
+            <div class="grid__cell action-left-section">
+              <article class="action-editor-wrap">
+                  <div class="super-condition">
+                    <button id="addSuperCondition" class="article-btn"><i class="fa fa-plus-circle" aria-hidden="true"></i><h5>Add Student Filter</h5></button>
+                  </div>
+                  <div class="action-editor-list">
+                    <ol id="conditions"></ol>
+        
+                    <!-- insert jquery 1.x in order to load query builder, will trigger $.noConflict() in the rule.js to restore 2.x version -->
+                    <link href="/styles/queryBuilder/bootstrap.min.css" rel="stylesheet">
+                    <link href="/styles/queryBuilder/bootstrap-select.min.css" rel="stylesheet">
+                    <link href="/styles/queryBuilder/query-builder.default.css" rel="stylesheet">
+        
+                    <link rel="stylesheet" type="text/css" href="/bower_components/clockpicker/dist/bootstrap-clockpicker.min.css">
+        
+                    <script src="/js/queryBuilder/jquery.min.js"></script>
+                    <script src="/js/queryBuilder/jQuery.extendext.min.js"></script>
+                    <script src="/js/queryBuilder/bootstrap.min.js"></script>
+                    <script src="/js/queryBuilder/doT.js"></script>
+                    <script src="/js/queryBuilder/query-builder.js"></script>
+                    <script src="/js/rule.js"></script>
+                    <!-- end of inserting query builder dependencies -->
+        
+                    <button id="addCondition" class="article-btn"><i class="fa fa-plus-circle" aria-hidden="true"></i><h5>New condition</h5></button>
+                    <button id="confirmCondition" style="display: none;" class="article-btn"><i class="fa fa-check-circle" aria-hidden="true"></i><h5>Verify condition</h5></button>
+                  </div>
+                </article>
+            </div>
+        </div>
     </div>
-
-    <div class="1/2 grid__cell">
-      <article class="action-editor-wrap">
-
-        <div class="test-run-block">
-          <button id="saveRule"><i class="fa fa-clipboard" aria-hidden="true"></i> &nbsp;Copy As&nbsp;</button>
-          <button id="actionSubmit" style="background: #d9534f;"><i class="fa fa-floppy-o" aria-hidden="true"></i> &nbsp;Save&nbsp; </button>
-          <button id="runTest"><i class="fa fa-flask" aria-hidden="true"></i> &nbsp;Test&nbsp; </button>
-          <button id="runRule"><i class="fa fa-play" aria-hidden="true"></i> &nbsp;Run&nbsp; </button>
+  </div>
+   
+  <div class="column blue">
+    <div class="content">
+        <div class="grid">
+            <div class="grid__cell action-right-section">
+              <article class="action-editor-wrap">
+        
+                <div class="test-run-block">
+                  <button id="saveRule"><i class="fa fa-clipboard" aria-hidden="true"></i> &nbsp;Copy As&nbsp;</button>
+                  <button id="actionSubmit" style="background: #d9534f;"><i class="fa fa-floppy-o" aria-hidden="true"></i> &nbsp;Save&nbsp; </button>
+                  <button id="runTest"><i class="fa fa-flask" aria-hidden="true"></i> &nbsp;Test&nbsp; </button>
+                  <button id="runRule"><i class="fa fa-play" aria-hidden="true"></i> &nbsp;Run&nbsp; </button>
+                </div>
+        
+                <div class="action-editor-insert">
+                  <div class="grid">
+                    <div class="grid__cell action-block">
+                      <span><i class="fa fa-info" aria-hidden="true"></i>&nbsp;Change Rule Infomation</span>
+                      <div class="grid">
+                        <div class="1/2 grid__cell">
+                          <div class="action-editor-heading">
+                            <h1>Rule Name: </h1>
+                            <input type="text" id="ruleName" /><br>
+                          </div>
+                        </div>
+        
+                        <div class="1/2 grid__cell">
+                          <div class="action-editor-heading">
+                            <h1>Description: </h1>
+                            <input rows="4" cols="50" type="text" id="ruleDescription" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="grid__cell">
+                      <span><i class="fa fa-info" aria-hidden="true"></i>&nbsp;Insert Conditions to Email Template</span>
+                      <div class="grid grid-insert-condition">
+                        <div class="1/2 grid__cell">
+                          <select id="selectKey"></select>
+                        </div>
+                        <div class="1/2 grid__cell">
+                          <button id="insertKey" class="article-btn"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><h5>insert Data field</h5></button>
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="grid__cell">
+                      <div class="grid grid-insert-condition">
+                        <div class="1/2 grid__cell">
+                          <select id="selectCondition"></select>
+                          <select id="selectBoolean">
+                            <option>True</option>
+                            <option>False</option>
+                          </select>
+                        </div>
+                        <div class="1/2 grid__cell">
+                          <button id="insertCondition" class="article-btn"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><h5>insert condition</h5></button>
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="grid__cell">
+                      <div class="grid grid-insert-condition">
+                        <div class="1/2 grid__cell">
+                          <select id="selectCustomAttribute"></select>
+                        </div>
+                        <div class="1/2 grid__cell">
+                          <button id="insertCustomAttribute" class="article-btn"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><h5>insert custom attributes</h5></button>
+                        </div>
+                      </div>
+                    </div>
+        
+                  </div>
+        
+                  <div class="grid">
+                    <div class="grid__cell action-block">
+                      <span><i class="fa fa-info" aria-hidden="true"></i>&nbsp;Create Email Template</span>
+        
+                      <div class="grid">
+                        <div class="1/2 grid__cell">
+                          <div class="action-editor-heading">
+                            <h1>Email Subject: </h1>
+                            <input type="text" id="emailSubject" /><br>
+                          </div>
+                        </div>
+                      </div>
+        
+                      <div id="action" style="margin-top: 10px;" class="query-input action-editor-email">
+                        <textarea id="ruleAction" style="display: block; width: 100%; margin-top: 100px;" rows="5"></textarea>
+                      </div>
+        
+                      <% include ../partials/schedule %>
+        
+                      <div class="grid">
+                        <div class="1/2 grid__cell">
+                          <span class="action-notification-type-heading">Email</span>
+                          <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="action-email" checked>
+                            <label class="onoffswitch-label" for="action-email">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                          </div>
+                        </div>
+        
+                        <div class="1/2 grid__cell">
+                          <span class="action-notification-type-heading">Notification</span>
+                          <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="action-notification">
+                            <label class="onoffswitch-label" for="action-notification">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                          </div>
+                        </div>
+        
+                      </div>
+        
+        
+                      <!-- <input type="checkbox" class="notificationType" value="email" checked /><span>Email</span>
+                      <input type="checkbox" class="notificationType" value="notification" /><span>Notification Html</span> -->
+                    </div>
+        
+                  </div>
+                </div>
+        
+              </article>
+        
+            </div>
         </div>
-
-        <div class="action-editor-insert">
-          <div class="grid">
-            <div class="grid__cell action-block">
-              <span><i class="fa fa-info" aria-hidden="true"></i>&nbsp;Change Rule Infomation</span>
-              <div class="grid">
-                <div class="1/2 grid__cell">
-                  <div class="action-editor-heading">
-                    <h1>Rule Name: </h1>
-                    <input type="text" id="ruleName" /><br>
-                  </div>
-                </div>
-
-                <div class="1/2 grid__cell">
-                  <div class="action-editor-heading">
-                    <h1>Description: </h1>
-                    <input rows="4" cols="50" type="text" id="ruleDescription" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="grid__cell">
-              <span><i class="fa fa-info" aria-hidden="true"></i>&nbsp;Insert Conditions to Email Template</span>
-              <div class="grid grid-insert-condition">
-                <div class="1/2 grid__cell">
-                  <select id="selectKey"></select>
-                </div>
-                <div class="1/2 grid__cell">
-                  <button id="insertKey" class="article-btn"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><h5>insert Data field</h5></button>
-                </div>
-              </div>
-            </div>
-
-            <div class="grid__cell">
-              <div class="grid grid-insert-condition">
-                <div class="1/2 grid__cell">
-                  <select id="selectCondition"></select>
-                  <select id="selectBoolean">
-                    <option>True</option>
-                    <option>False</option>
-                  </select>
-                </div>
-                <div class="1/2 grid__cell">
-                  <button id="insertCondition" class="article-btn"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><h5>insert condition</h5></button>
-                </div>
-              </div>
-            </div>
-
-            <div class="grid__cell">
-              <div class="grid grid-insert-condition">
-                <div class="1/2 grid__cell">
-                  <select id="selectCustomAttribute"></select>
-                </div>
-                <div class="1/2 grid__cell">
-                  <button id="insertCustomAttribute" class="article-btn"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i><h5>insert custom attributes</h5></button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="grid">
-            <div class="grid__cell action-block">
-              <span><i class="fa fa-info" aria-hidden="true"></i>&nbsp;Create Email Template</span>
-
-              <div class="grid">
-                <div class="1/2 grid__cell">
-                  <div class="action-editor-heading">
-                    <h1>Email Subject: </h1>
-                    <input type="text" id="emailSubject" /><br>
-                  </div>
-                </div>
-              </div>
-
-              <div id="action" style="margin-top: 10px;" class="query-input action-editor-email">
-                <textarea id="ruleAction" style="display: block; width: 100%; margin-top: 100px;" rows="5"></textarea>
-              </div>
-
-              <% include ../partials/schedule %>
-
-              <div class="grid">
-                <div class="1/2 grid__cell">
-                  <span class="action-notification-type-heading">Email</span>
-                  <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="action-email" checked>
-                    <label class="onoffswitch-label" for="action-email">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
-                  </div>
-                </div>
-
-                <div class="1/2 grid__cell">
-                  <span class="action-notification-type-heading">Notification</span>
-                  <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="action-notification">
-                    <label class="onoffswitch-label" for="action-notification">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
-                  </div>
-                </div>
-
-              </div>
-
-
-              <!-- <input type="checkbox" class="notificationType" value="email" checked /><span>Email</span>
-              <input type="checkbox" class="notificationType" value="notification" /><span>Notification Html</span> -->
-            </div>
-
-          </div>
-        </div>
-
-      </article>
-
     </div>
   </div>
 </section>

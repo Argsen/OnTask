@@ -879,19 +879,40 @@ $uploadCSV.on("click", function() {
       if (response.data) {
         createTable();
       } else {
-        if (confirm('Matrix not exists, do you want directly generate matrix based on this table?')) {
-        //  for (var i=0; i<)
-          if (primaryKey) {
-            createTable(true);
-          } else {
-            alert("Please choose primary key");
-          }
-        } else {
-          createTable();
-        }
+        var $modal = $("#direct-matrix-modal");
+        $modal.modal();
+
+        // if (confirm('Matrix not exists, do you want directly generate matrix based on this table?')) {
+        // //  for (var i=0; i<)
+        //   if (primaryKey) {
+        //     createTable(true);
+        //   } else {
+        //     alert("Please choose primary key");
+        //   }
+        // } else {
+        //   createTable();
+        // }
       }
     }
   });
+
+  $("#directGenerateMatrix").off('click');
+  $("#onlyUploadFile").off('click');
+  $("#directGenerateMatrix").click(function() {
+    if (primaryKey) {
+      createTable(true);
+    } else {
+      alert("Please choose primary key");
+    }
+    $.modal.close();
+  });
+
+  $("#onlyUploadFile").click(function() {
+    createTable();
+    $.modal.close();
+  });
+
+  
 
   function createTable(createMatrix) {
     console.log(primaryKey);
