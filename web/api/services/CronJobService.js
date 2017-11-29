@@ -334,3 +334,70 @@ function ruleRunFunc(obj) {
     }
   });
 }
+
+function sendEmail(userId, notificationObj, email, result) {
+  Notification.create(notificationObj).exec(function (err, notification){
+    if (err) {
+      console.log(err);
+    } else {
+      User.findOne(userId).exec(function (err, user) {
+        let emailObj = {
+          to: email,
+          subject: notificationObj.subject,
+          text: result,
+          html: '<p><b>Please do not reply this email, please reply to</b> <a href="mailto:' + user.email + '">' + user.email + '</a>.<img style="display: none;" src="' + sails.config.constant.domain + '/image?' + Buffer.from('notificationId=' + notification.id).toString('base64') + '" /></p>' + result
+        };
+        EmailService.send(emailObj, function (err, info) {
+          if (err) {
+            notification.status = 'failed';
+          } else {
+            notification.status = 'sent';
+          }
+          Notification.update(notification.id, notification).exec(function (err, notification){
+
+          });
+        });
+      });
+    }
+  });
+}
+
+function expressionConstruct(condition, data, expressionResult) {
+  for (var i=0; i<condition.length; i++) {
+    if (condition[i].expressions) {
+      expressionResult = expressionResult + '(';
+      expressionResult = expressionConstruct(condition[i].expressions, data, expressionResult);
+      if (i < (condition.length - 1)) {
+        expressionResult += ') ' + condition[i].logical + ' '
+      } else {
+        expressionResult += ') '
+      }
+    } else {
+      if ((condition[i].symbol == ">" || condition[i].symbol == ">=" || condition[i].symbol == "<=" || condition[i].symbol == "<") && (!isNumber(data[condition[i].target]) || (/^0[0-9].*$/.test(data[condition[i].target])))) {
+        expressionResult = "false";
+        return "false";
+      } else {
+        if (isNumber(data[condition[i].target]) && !(/^0[0-9].*$/.test(data[condition[i].target]))) {
+          expressionResult += String(data[condition[i].target]) + ' ';
+        } else {
+          expressionResult += '"' + String(data[condition[i].target]) + '"' + ' ';
+        }
+        expressionResult += condition[i].symbol + ' ';
+        if (/^\+?(0|[1-9]\d*)$/.test(condition[i].value.replace(/"/g, ''))) {
+          expressionResult += String(condition[i].value.replace(/"/g, '')) + ' ';
+        } else {
+          expressionResult += '"' + String(condition[i].value.replace(/"/g, '')) + '"' + ' ';
+        }
+
+        if (condition[i].logical && i < (condition.length - 1)) {
+          expressionResult += condition[i].logical + ' ';
+        }
+      }
+    }
+  }
+  return expressionResult;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}

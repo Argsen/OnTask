@@ -201,6 +201,7 @@ const RuleController = {
               let notificationType = JSON.parse(rule.data).notificationType;
               let superCondition = JSON.parse(rule.data).superCondition;
               let emailSubject = JSON.parse(rule.data).emailSubject;
+              let fromEmailAddress = JSON.parse(rule.data).fromEmailAddress;
 
               serverInfo.database = sails.config.constant.serverInfo.workflowDB;
               serverInfo.multipleStatements = true;
@@ -278,7 +279,8 @@ const RuleController = {
                         status: '',
                         read: 'false',
                         data: result,
-                        subject: emailSubject
+                        subject: emailSubject,
+                        from: fromEmailAddress
                       };
 
                       if (notificationType.notification) {
@@ -366,6 +368,7 @@ const RuleController = {
               let notificationType = JSON.parse(rule.data).notificationType;
               let superCondition = JSON.parse(rule.data).superCondition;
               let emailSubject = JSON.parse(rule.data).emailSubject;
+              let fromEmailAddress = JSON.parse(rule.data).fromEmailAddress;
 
               serverInfo.database = sails.config.constant.serverInfo.workflowDB;
               serverInfo.multipleStatements = true;

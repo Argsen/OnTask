@@ -122,12 +122,19 @@
                       <span><i class="fa fa-info" aria-hidden="true"></i>&nbsp;Create Email Template</span>
         
                       <div class="grid">
-                        <div class="1/2 grid__cell">
-                          <div class="action-editor-heading">
-                            <h1>Email Subject: </h1>
-                            <input type="text" id="emailSubject" /><br>
+                          <div class="1/3 grid__cell">
+                            <div class="action-editor-heading">
+                              <h1>Email Subject: </h1>
+                              <input type="text" id="emailSubject" /><br>
+                            </div>
                           </div>
-                        </div>
+                          <!-- Used for set from email address, default set to user's login email, remove display: none to show -->
+                          <div class="1/2 grid__cell" style="display: none;">
+                            <div class="action-editor-heading">
+                              <h1>From Email Address: </h1>
+                              <input type="text" id="fromEmailAddress" /><br>
+                            </div>
+                          </div>
                       </div>
         
                       <div id="action" style="margin-top: 10px;" class="query-input action-editor-email">

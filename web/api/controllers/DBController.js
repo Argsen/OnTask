@@ -407,7 +407,6 @@ module.exports = {
   },
 
   uploadTable: function (req, res) {
-    let userId = req.session.sUserId || 0;
     let workflowId = req.session.sWorkflowId || 0;
     let serverInfo = sails.config.constant.serverInfo.config;
     let name = req.param('name');
@@ -420,7 +419,7 @@ module.exports = {
     let adminDB = sails.config.constant.serverInfo.adminDB;
     let workflowDB = sails.config.constant.serverInfo.workflowDB;
 
-    if (userId !== 0) {
+    if (workflowId !== 0) {
       serverInfo.database = adminDB;
       serverInfo.multipleStatements = true;
       let csvData = [];

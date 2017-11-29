@@ -55,6 +55,7 @@ function email(data, done) {
 		auth: dir.settings.email.auth
 	}, {
 		from: dir.settings.email.from
+	// from: data.from    // enable this to use customized from email address in rule
 	});
 
 	transporter.sendMail(data);

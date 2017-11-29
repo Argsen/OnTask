@@ -169,6 +169,8 @@ $("#confirmCondition").click(function () {
   });
 });
 
+$("#fromEmailAddress").val(JSON.parse(window.localStorage.getItem('onTaskInfo')).email);
+
 list.getStructure('user', function (response) {
   for (var key in list.data[list.workflowDB]) {
     if (key == 'workflow' + list.workflowId) {
@@ -204,6 +206,9 @@ list.getStructure('user', function (response) {
           $("#ruleDescription").val(response.data.description);
           if (response.data.data) {
             $("#emailSubject").val(JSON.parse(response.data.data).emailSubject);
+            if (JSON.parse(response.data.data).fromEmailAddress) {
+              $("#fromEmailAddress").val(JSON.parse(response.data.data).fromEmailAddress);
+            }
           }
           if (response.data.schedule) {
             var schedule = response.data.schedule.split(" ");
@@ -307,7 +312,8 @@ var ruleData = {
     notification: false
   },
   superCondition: '',
-  emailSubject: ''
+  emailSubject: '',
+  fromEmailAddress: ''
 };
 
 
@@ -318,6 +324,7 @@ $("#saveRule").click(function() {
   $ruleScheduleToggle.trigger("click");
 
   ruleData.emailSubject = $("#emailSubject").val();
+  ruleData.fromEmailAddress = $("#fromEmailAddress").val();
 
   $.ajax({
     type: 'POST',
@@ -385,6 +392,7 @@ var runSave = function(callback){
   });
 
   ruleData.emailSubject = $("#emailSubject").val();
+  ruleData.fromEmailAddress = $("#fromEmailAddress").val();
   if (!tinymce.activeEditor.getContent()) {
     return callback("error");
   }
