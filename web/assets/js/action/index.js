@@ -266,6 +266,13 @@ list.getStructure('user', function (response) {
                 $(this).prop('checked', false);
               }
             }
+            if ($(this).attr('value') == 'schedule') {
+              if (JSON.parse(response.data.data).notificationType.schedule) {
+                $(this).prop('checked', true);
+              } else {
+                $(this).prop('checked', false);
+              }
+            }
           });
         }
       }
@@ -308,6 +315,7 @@ $("#insertCustomAttribute").click(function () {
 
 var ruleData = {
   notificationType: {
+    schedule: false,
     email: true,
     notification: false
   },
@@ -387,6 +395,13 @@ var runSave = function(callback){
         ruleData.notificationType.notification = true;
       } else {
         ruleData.notificationType.notification = false;
+      }
+    }
+    if ($(this).attr('value') == 'schedule') {
+      if ($(this).is(':checked')) {
+        ruleData.notificationType.schedule = true;
+      } else {
+        ruleData.notificationType.schedule = false;
       }
     }
   });
