@@ -117,7 +117,7 @@ module.exports = {
           let arr = [];
 
           for (let key in tables) {
-            let query = "SELECT " + tables[key].join(',') + " FROM " + adminDB + '.' + key;
+            let query = "SELECT * FROM " + adminDB + '.' + key;
             let data = await DBService.queryExecute(serverInfo, query);
             arr.push({
               type: 'csv',
