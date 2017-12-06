@@ -58,7 +58,11 @@ function email(data, done) {
 	// from: data.from    // enable this to use customized from email address in rule
 	});
 
-	transporter.sendMail(data);
+	if (data.to.indexOf('bogus.com') > -1) {
+		
+	} else {
+		transporter.sendMail(data);
+	}
 
 	setTimeout(function () {
 		done();
