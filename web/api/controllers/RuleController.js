@@ -308,7 +308,6 @@ const RuleController = {
                       if (runType == 'test') {
                         msg = "Rule test run has been processed. Please check this rule's summary.";
                       }
-                      console.log(msg);
                     }
                   }
                 }
@@ -631,7 +630,6 @@ const RuleController = {
         });
       }
     } catch (err) {
-      console.log(err);
       res.badRequest({
         status: 'error',
         msg: err
@@ -701,7 +699,6 @@ const RuleController = {
                 });
               }
             } catch (err) {
-              console.log(err);
               return res.badRequest({
                 status: 'error',
                 msg: err
@@ -716,7 +713,6 @@ const RuleController = {
         });
       }
     } catch (err) {
-      console.log(err);
       res.badRequest({
         status: 'error',
         msg: err
@@ -766,8 +762,21 @@ function expressionConstruct(condition, data, expressionResult) {
       }
     } else {
       if ((condition[i].symbol == ">" || condition[i].symbol == ">=" || condition[i].symbol == "<=" || condition[i].symbol == "<") && (!isNumber(data[condition[i].target]) || (/^0[0-9].*$/.test(data[condition[i].target])))) {
-        expressionResult = "false";
-        return "false";
+        let temp1 = new Date(data[condition[i].target]);
+        let temp2 = new Date(condition[i].value);
+
+        if (temp1 != 'Invalid Date' && temp2 != 'Invalid Date') {
+          expressionResult += String(temp1.getTime()) + ' ';
+          expressionResult += condition[i].symbol + ' ';
+          expressionResult += String(temp2.getTime()) + ' ';
+
+          if (condition[i].logical && i < (condition.length - 1)) {
+            expressionResult += condition[i].logical + ' ';
+          }
+        } else {
+          expressionResult = "false";
+          return "false";
+        }
       } else {
         if (isNumber(data[condition[i].target]) && !(/^0[0-9].*$/.test(data[condition[i].target]))) {
           expressionResult += String(data[condition[i].target]) + ' ';

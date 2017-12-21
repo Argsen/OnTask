@@ -125,19 +125,19 @@ module.exports = {
         for (var i=0; i<Math.ceil(data.datas.length/1000); i++) {
           query = 'INSERT INTO ' + name + ' (' + data.columns.join(',') + ') VALUES ';
 
-          for (var j=(i*1000+1); j<(i*1000 + 1000 + 1); j++) {
+          for (var j=(i*1000); j<(i*1000 + 1000); j++) {
             if (j == data.datas.length) {
               break;
             }
             if (data.datas[j]) {
               if (data.datas[j].length !== data.datas[0].length) {
-                if (j==(i*1000 + 1000) && query[query.length - 1] === ',') {
+                if (j==(i*1000 + 1000 - 1) && query[query.length - 1] === ',') {
                   query = query.substring(0, query.length - 1) + ';';
                 }
                 continue;
               }
               query += '(' + data.datas[j].join(',') + ')';
-              if (j==(i*1000 + 1000) || j == (data.datas.length - 1)) {
+              if (j==(i*1000 + 1000 - 1) || j == (data.datas.length - 1)) {
                 query += ';';
               } else {
                 query += ',';
