@@ -2,9 +2,7 @@
   "name": "OnTask",
   "description": "OnTask OLTP Web APP",
   "main": "app.js",
-  "authors": [
-    "yin_gong<max.g.laboratory@gmail.com>"
-  ],
+  "authors": ["contact@argsen.com"],
   "license": "MIT",
   "keywords": [
     "OnTask",
